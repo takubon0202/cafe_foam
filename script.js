@@ -1363,6 +1363,7 @@ function renderCustomerCautionsPage() {
 function renderHygiene() {
     renderStaffHygiene();
     renderManagerHygiene();
+    renderHealthCheck();
 
     // Mermaidがあれば衛生セクションの図を初期化（描画後に実行）
     if (typeof mermaid !== 'undefined') {
@@ -1418,6 +1419,58 @@ function renderStaffHygiene() {
 
         html += '</div>';
     });
+
+    container.innerHTML = html;
+}
+
+function renderHealthCheck() {
+    const container = document.getElementById('healthCheckContent');
+    if (!container) return;
+
+    const data = initialData.hygiene.healthCheck;
+    if (!data) return;
+
+    let html = '';
+
+    html += `<div class="hygiene-header">`;
+    html += `<h3>${data.title}</h3>`;
+    if (data.subtitle) {
+        html += `<p class="hygiene-subtitle">${data.subtitle}</p>`;
+    }
+    html += `</div>`;
+
+    if (data.form?.fields) {
+        html += '<div class="hygiene-item">';
+        html += '<h4><i class="fas fa-list"></i> 基本項目</h4><ul>';
+        data.form.fields.forEach(f => {
+            html += `<li>${f}</li>`;
+        });
+        html += '</ul></div>';
+    }
+
+    if (data.form?.sections) {
+        data.form.sections.forEach(sec => {
+            html += '<div class="hygiene-item">';
+            html += `<h4>${sec.title}</h4>`;
+            if (sec.items) {
+                html += '<ul>';
+                sec.items.forEach(item => {
+                    html += `<li>${item}</li>`;
+                });
+                html += '</ul>';
+            }
+            html += '</div>';
+        });
+    }
+
+    if (data.form?.submission) {
+        html += '<div class="hygiene-item">';
+        html += '<h4><i class="fas fa-share-square"></i> 提出・運用</h4><ul>';
+        data.form.submission.forEach(item => {
+            html += `<li>${item}</li>`;
+        });
+        html += '</ul></div>';
+    }
 
     container.innerHTML = html;
 }
