@@ -120,8 +120,7 @@ function loadData() {
     // メニューページをレンダリング
     renderMenuPages();
 
-    // 清掃ページをレンダリング
-    renderCleaningPages();
+    // 清掃ページは統合済み（衛生ページ内で表示）
 
     // 提供方法ページをレンダリング
     renderServicePage();
@@ -1364,6 +1363,11 @@ function renderCustomerCautionsPage() {
 function renderHygiene() {
     renderStaffHygiene();
     renderManagerHygiene();
+
+    // Mermaidがあれば衛生セクションの図を初期化（描画後に実行）
+    if (typeof mermaid !== 'undefined') {
+        setTimeout(() => mermaid.init(undefined, document.querySelectorAll('.mermaid')), 0);
+    }
 }
 
 function renderStaffHygiene() {
@@ -1403,6 +1407,13 @@ function renderStaffHygiene() {
                 html += '</ul>';
                 html += '</div>';
             });
+        }
+
+        if (section.diagram) {
+            html += '<div class="mermaid-container">';
+            html += `<h5>フロー</h5>`;
+            html += `<pre class="mermaid">${section.diagram}</pre>`;
+            html += '</div>';
         }
 
         html += '</div>';
@@ -1451,6 +1462,13 @@ function renderManagerHygiene() {
                 html += '</ul>';
                 html += '</div>';
             });
+        }
+
+        if (section.diagram) {
+            html += '<div class="mermaid-container">';
+            html += `<h5>フロー</h5>`;
+            html += `<pre class="mermaid">${section.diagram}</pre>`;
+            html += '</div>';
         }
 
         html += '</div>';

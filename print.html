@@ -101,6 +101,10 @@
 
     <main id="printRoot"></main>
 
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: false, theme: 'default' });
+    </script>
     <script src="data.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -111,6 +115,9 @@
         renderHygiene(root);
         renderService(root);
         renderAirpay(root);
+        if (typeof mermaid !== 'undefined') {
+            setTimeout(() => mermaid.init(undefined, document.querySelectorAll('.mermaid')), 0);
+        }
     });
 
     function renderSection(root, title, contentEl, opts = {}) {

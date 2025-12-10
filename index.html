@@ -96,11 +96,8 @@
             <li><a href="#customer-cautions" class="nav-link" data-page="customer-cautions">
                 <i class="fas fa-exclamation-circle"></i> 接客の注意
             </a></li>
-            <li><a href="#cleaning" class="nav-link" data-page="cleaning">
-                <i class="fas fa-broom"></i> 清掃マニュアル
-            </a></li>
             <li><a href="#hygiene" class="nav-link" data-page="hygiene">
-                <i class="fas fa-hand-sparkles"></i> 衛生マニュアル
+                <i class="fas fa-hand-sparkles"></i> 衛生・清掃マニュアル
             </a></li>
             <li><a href="#troubleshooting" class="nav-link" data-page="troubleshooting">
                 <i class="fas fa-wrench"></i> トラブルシューティング
@@ -132,23 +129,14 @@
                     <p>全メニューの作り方を確認</p>
                 </div>
 
-                <!-- 清掃マニュアルカード -->
-                <div class="main-menu-card" onclick="navigateToPage('cleaning')">
-                    <div class="main-menu-icon">
-                        <i class="fas fa-broom"></i>
-                    </div>
-                    <h3>清掃マニュアル</h3>
-                    <p>日次・週次・月次の清掃手順</p>
+            <!-- 衛生・清掃マニュアルカード -->
+            <div class="main-menu-card" onclick="navigateToPage('hygiene')">
+                <div class="main-menu-icon">
+                    <i class="fas fa-hand-sparkles"></i>
                 </div>
-
-                <!-- 衛生マニュアルカード -->
-                <div class="main-menu-card" onclick="navigateToPage('hygiene')">
-                    <div class="main-menu-icon">
-                        <i class="fas fa-hand-sparkles"></i>
-                    </div>
-                    <h3>衛生マニュアル</h3>
-                    <p>衛生管理と食品安全基準</p>
-                </div>
+                <h3>衛生・清掃マニュアル</h3>
+                <p>衛生管理と清掃手順</p>
+            </div>
 
                 <!-- 提供方法カード -->
                 <div class="main-menu-card" onclick="navigateToPage('service')">
@@ -195,8 +183,8 @@
                         <div class="checklist-summary">
                             <p>完了: <span id="completedCount">0</span> / <span id="totalCount">0</span></p>
                         </div>
-                        <button class="btn btn-secondary" onclick="navigateToPage('cleaning')">
-                            清掃マニュアルへ
+                        <button class="btn btn-secondary" onclick="navigateToPage('hygiene')">
+                            衛生・清掃マニュアルへ
                         </button>
                     </div>
                 </div>
@@ -472,10 +460,10 @@
             <div class="menu-content" id="earlGreyTeaContent"></div>
         </section>
 
-<!-- 清掃マニュアル -->
-        <section id="cleaning" class="page">
+        <!-- 衛生・清掃マニュアル -->
+        <section id="hygiene" class="page">
             <div class="page-header">
-                <h2><i class="fas fa-broom"></i> 清掃マニュアル</h2>
+                <h2><i class="fas fa-hand-sparkles"></i> 衛生・清掃マニュアル</h2>
                 <div class="page-actions">
                     <button class="btn btn-secondary" onclick="window.print()">
                         <i class="fas fa-print"></i> 印刷
@@ -484,32 +472,17 @@
             </div>
 
             <div class="tabs">
-                <button class="tab-btn active" data-tab="daily">日次清掃</button>
-                <button class="tab-btn" data-tab="weekly">週次清掃</button>
-                <button class="tab-btn" data-tab="monthly">月次清掃</button>
+                <button class="tab-btn active" data-tab="staff">スタッフ用</button>
+                <button class="tab-btn" data-tab="manager">責任者・教育用</button>
             </div>
 
             <div class="tab-content">
-                <div id="daily-tab" class="tab-pane active">
-                    <div class="cleaning-section" id="dailyTasks"></div>
+                <div id="staff-tab" class="tab-pane active">
+                    <div class="hygiene-section" id="staffHygieneContent"></div>
                 </div>
-                <div id="weekly-tab" class="tab-pane">
-                    <div class="cleaning-section" id="weeklyTasks"></div>
+                <div id="manager-tab" class="tab-pane">
+                    <div class="hygiene-section" id="managerHygieneContent"></div>
                 </div>
-                <div id="monthly-tab" class="tab-pane">
-                    <div class="cleaning-section" id="monthlyTasks"></div>
-                </div>
-            </div>
-
-            <div class="cleaning-calendar">
-                <h3>清掃履歴カレンダー</h3>
-                <div id="cleaningCalendar">
-                    <!-- Googleカレンダーが設定されている場合はここに表示 -->
-                </div>
-                <p class="calendar-note">
-                    <i class="fas fa-info-circle"></i>
-                    Googleカレンダーを表示するには、<a href="#settings" onclick="navigateToPage('settings')">設定ページ</a>でカレンダーURLを設定してください。
-                </p>
             </div>
         </section>
 
