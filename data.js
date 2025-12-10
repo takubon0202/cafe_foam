@@ -9,60 +9,46 @@ const initialData = {
             name: 'カフェラテ',
             englishName: 'Cafe Latte',
             category: 'ラテメニュー',
-            price: null,
+            price: 400,
             volume: '約240mL（HOT/ICE）',
             duration: '約1分',
             ingredients: [
-                'エスプレッソ 2ショット',
-                'ミルク 180mL（スチーム用）'
+                'エスプレッソ',
+                'ミルク'
             ],
             equipment: [
-                'エスプレッソマシン（ダブルショット）',
+                'エスプレッソマシン',
                 'スチームノズルとミルクピッチャー',
-                'カップ（ホット/アイス用）'
+                'カップ（ホット/アイス）'
             ],
             allergens: ['乳'],
-            warnings: [
-                'スチームノズル・抽出口は高温なので触れる前に蒸気抜きをする',
-                'アイス提供時は氷を先に入れたグラスを用意し、薄まりすぎに注意'
-            ],
+            warnings: [],
             steps: [
-                { number: 1, title: 'カップを準備', description: 'ホットはカップを温める。アイスは氷を満たしたグラスを準備する。シロップは使わず、エスプレッソとミルクで仕上げる。', tips: ['1杯あたり提供目安1分以内'] },
-                { number: 2, title: 'エスプレッソ抽出', description: 'カップにダブルショットを直接抽出する。', tips: ['抽出は25〜30秒が目安'] },
-                { number: 3, title: 'ミルクをスチーム', description: 'ミルクを60〜65℃までスチームし、きめ細かいフォームを作る。', tips: ['フォームは薄くなめらかに', '加熱しすぎると風味が落ちる'] },
-                { number: 4, title: '注ぐ', description: 'エスプレッソの上にスチームミルクを注ぎ、最後にフォームを軽くのせて完成。アイスは氷の上に注ぐ。', tips: ['フォームは1cmほどの厚み', '提供直後に出す'] }
+                { number: 1, title: '豆をセット', description: 'コーヒー豆を付属スプーン２杯（　g）をマシンに投入する。' },
+                { number: 2, title: 'エスプレッソ抽出', description: 'カップにエスプレッソを 2杯抽出する。' },
+                { number: 3, title: 'ミルクをスチーム', description: '抽出が完了したら、牛乳　　㎖をスチームする。' },
+                { number: 4, title: '注ぐ', description: 'カップの縁から6㎜くらい下までスチームミルクを注ぐ。', tips: ['フォームミルクをスプーンなどで避けながら注ぐ。'] },
+                { number: 5, title: '仕上げ', description: 'フォームミルクをカップの縁まで乗せる。' }
             ],
-            troubleshooting: [
-                { problem: '味が薄い', solution: '抽出時間と豆量を確認し、ショットを安定させる。' },
-                { problem: '泡が粗い', solution: 'スチームの角度と空気の取り込み量を調整し、60℃付近で止める。' }
-            ],
-            qualityStandards: [
-                '提供1分以内',
-                'フォームはきめ細かく、表面は艶がある',
-                'エスプレッソの風味がしっかり感じられるバランス'
-            ],
-            variations: [
-                '甘さはガムシロやシロップ追加で調整',
-                'アイスは氷多め/少なめを声掛け'
-            ],
-            cleaning: [
-                'スチーム後はノズルを拭き取り、2〜3秒空打ち',
-                'トレーやカップ受けは営業後に洗浄'
-            ],
-            references: ['Campus Cafe Proposal：商品オペレーション']
+            troubleshooting: [],
+            qualityStandards: [],
+            variations: [],
+            cleaning: [],
+            references: []
         },
         cafeMocha: {
             id: 'cafeMocha',
             name: 'カフェモカ',
             englishName: 'Cafe Mocha',
             category: 'ラテメニュー',
-            price: null,
+            price: 400,
             volume: '約240mL（HOT/ICE）',
             duration: '約1分',
             ingredients: [
-                'チョコレートソース 1プッシュ',
-                'エスプレッソ 2ショット',
-                'ミルク 180mL'
+                'エスプレッソ',
+                'チョコレートソース',
+                'ミルク',
+                'ホイップ'
             ],
             equipment: [
                 'エスプレッソマシン',
@@ -70,48 +56,34 @@ const initialData = {
                 'カップ（ホット/アイス）'
             ],
             allergens: ['乳'],
-            warnings: [
-                'チョコソースは沈みやすいのでよく混ぜて提供',
-                'スチーム後のノズルは高温'
-            ],
+            warnings: [],
             steps: [
-                { number: 1, title: 'ソースを入れる', description: '温めたカップ（アイスは氷入りグラス）にチョコレートソースを1プッシュ。', tips: ['カップの底に広げると混ざりやすい'] },
-                { number: 2, title: 'エスプレッソ抽出', description: 'カップにダブルショットを直接抽出し、ソースとなじませる。', tips: ['軽くスプーンでひと混ぜするとムラが減る'] },
-                { number: 3, title: 'ミルクをスチーム', description: 'ミルクを60〜65℃でスチームし、きめ細かいフォームにする。', tips: ['甘さを感じやすいので温度上げすぎ注意'] },
-                { number: 4, title: '注ぐ・仕上げ', description: 'スチームミルクを注ぎ、フォームで仕上げる。アイスは氷の上に注ぐ。', tips: ['仕上げにチョコソースを細くかけてもOK'] }
+                { number: 1, title: '豆をセット', description: 'コーヒー豆を付属スプーン２杯（　g）をマシンに投入する。' },
+                { number: 2, title: 'ソースを入れる', description: 'カップにチョコレートソースを　　　㎖入れる。' },
+                { number: 3, title: 'エスプレッソ抽出', description: 'カップにエスプレッソを 2杯抽出する。', tips: ['ソースとよく混ぜる。'] },
+                { number: 4, title: 'ミルクをスチーム', description: '抽出が完了したら、牛乳　　㎖をスチームする。' },
+                { number: 5, title: '注ぐ', description: 'カップの縁から12㎜くらい下までスチームミルクを注ぐ。', tips: ['フォームミルクをスプーンなどで避けながら注ぐ。'] },
+                { number: 6, title: 'ホイップ', description: 'ホイップ（　周）をのせる。' }
             ],
-            troubleshooting: [
-                { problem: '甘さが強すぎる', solution: 'ソース量を半プッシュに調整。味見してから提供。' },
-                { problem: '層が分離する', solution: 'ショット抽出後に1〜2回混ぜてからミルクを注ぐ。' }
-            ],
-            qualityStandards: [
-                'チョコの香りが立ち、エスプレッソの苦味とバランス',
-                'フォームはきめ細かく滑らか',
-                '提供1分以内'
-            ],
-            variations: [
-                'ホイップ追加でデザート寄りに',
-                'アイスは氷をやや多めにしてすっきり仕上げ'
-            ],
-            cleaning: [
-                'ソースが付いた器具はすぐに洗浄',
-                'スチームノズルの空打ちを必ず実施'
-            ],
-            references: ['Campus Cafe Proposal：商品オペレーション']
+            troubleshooting: [],
+            qualityStandards: [],
+            variations: [],
+            cleaning: [],
+            references: []
         },
         caramelMacchiato: {
             id: 'caramelMacchiato',
             name: 'キャラメルマキアート',
             englishName: 'Caramel Macchiato',
             category: 'ラテメニュー',
-            price: null,
+            price: 400,
             volume: '約240mL（HOT/ICE）',
             duration: '約1分',
             ingredients: [
-                'バニラシロップ 1プッシュ',
-                'エスプレッソ 2ショット',
-                'ミルク 180mL',
-                'キャラメルソース（仕上げ用）'
+                'エスプレッソ',
+                'バニラシロップ',
+                'ミルク',
+                'キャラメルソース'
             ],
             equipment: [
                 'エスプレッソマシン',
@@ -119,47 +91,35 @@ const initialData = {
                 'カップ（ホット/アイス）'
             ],
             allergens: ['乳'],
-            warnings: [
-                '仕上げのソースは垂れやすいので受け皿を用意',
-                'アイスは氷を多めにして甘さをバランス'
-            ],
+            warnings: [],
             steps: [
-                { number: 1, title: 'バニラシロップ', description: 'カップにバニラシロップを1プッシュ。アイスは氷入りグラスを用意。', tips: ['甘さを抑えたい時は半プッシュ'] },
-                { number: 2, title: 'エスプレッソ抽出', description: 'シロップの上からダブルショットを抽出。', tips: ['抽出後すぐ次工程へ'] },
-                { number: 3, title: 'ミルクをスチーム', description: 'ミルクを60〜65℃でスチームし、きめ細かいフォームを作る。', tips: ['フォームは軽めに、注ぎやすく'] },
-                { number: 4, title: '注ぐ・マキアート', description: 'ミルクを注ぎフォームで蓋をしたら、キャラメルソースを格子状または渦状にかけて提供。アイスは氷の上に注いでからソースをかける。', tips: ['ソースは細く素早くかける'] }
+                { number: 1, title: '豆をセット', description: 'コーヒー豆を付属スプーン２杯（　g）をマシンに投入する。' },
+                { number: 2, title: 'エスプレッソを別容器に抽出', description: '別容器にエスプレッソを 2杯抽出する。' },
+                { number: 3, title: 'バニラシロップ', description: 'カップにバニラシロップを　　　㎖入れる。' },
+                { number: 4, title: 'ミルクをスチーム', description: '牛乳　　㎖をスチームする。' },
+                { number: 5, title: 'ミルクを注ぐ', description: 'カップの 3/4 くらいまでスチームミルクを注ぐ。', tips: ['フォームミルクをスプーンなどで避けながら注ぐ。'] },
+                { number: 6, title: 'フォーム', description: 'フォームミルクを少なめに乗せる。' },
+                { number: 7, title: 'エスプレッソを注ぐ', description: '抽出しておいたエスプレッソを注ぐ。' },
+                { number: 8, title: 'キャラメルソース', description: 'キャラメルソースをおしゃれにかける。' }
             ],
-            troubleshooting: [
-                { problem: '甘さが強すぎる', solution: 'シロップを半量にし、ソースは控えめに。' },
-                { problem: 'ソースが沈む', solution: 'フォームをしっかり乗せてからソースをかける。' }
-            ],
-            qualityStandards: [
-                'バニラの香りとキャラメルのコクが感じられる',
-                'フォームは白く滑らか',
-                '提供1分以内'
-            ],
-            variations: [
-                'ソースをキャラメル→チョコに替えてモカ風に',
-                'アイスは氷多めで後味を軽く'
-            ],
-            cleaning: [
-                'ソースノズルは詰まりを防ぐため使用後拭き取り',
-                'スチームノズルは毎回空打ち'
-            ],
-            references: ['Campus Cafe Proposal：商品オペレーション']
+            troubleshooting: [],
+            qualityStandards: [],
+            variations: [],
+            cleaning: [],
+            references: []
         },
         vanillaLatte: {
             id: 'vanillaLatte',
             name: 'バニララテ',
             englishName: 'Vanilla Latte',
             category: 'ラテメニュー',
-            price: null,
+            price: 400,
             volume: '約240mL（HOT/ICE）',
             duration: '約1分',
             ingredients: [
-                'バニラシロップ 1プッシュ',
-                'エスプレッソ 2ショット',
-                'ミルク 180mL'
+                'エスプレッソ',
+                'バニラシロップ',
+                'ミルク'
             ],
             equipment: [
                 'エスプレッソマシン',
@@ -167,47 +127,34 @@ const initialData = {
                 'カップ（ホット/アイス）'
             ],
             allergens: ['乳'],
-            warnings: [
-                'シロップは先に入れ、底に残らないよう混ぜる',
-                'スチーム後のノズルにミルク残りがないよう空打ち'
-            ],
+            warnings: [],
             steps: [
-                { number: 1, title: 'シロップを入れる', description: '温めたカップ（または氷入りグラス）にバニラシロップ1プッシュ。', tips: ['甘さ控えめは半プッシュ'] },
-                { number: 2, title: 'エスプレッソ抽出', description: 'シロップの上からダブルショットを抽出し、軽く混ぜてなじませる。', tips: ['混ぜすぎず1〜2回でOK'] },
-                { number: 3, title: 'ミルクをスチーム', description: '60〜65℃でスチームし、微細なフォームを作る。', tips: ['音を小さく、表面を滑らかに'] },
-                { number: 4, title: '注ぐ', description: 'ミルクを注ぎ、フォームで蓋をして完成。アイスは氷の上に注ぐ。', tips: ['フォームを薄く均一に'] }
+                { number: 1, title: '豆をセット', description: 'コーヒー豆を付属スプーン２杯（　g）をマシンに投入する。' },
+                { number: 2, title: 'シロップ', description: 'カップにバニラシロップ（　　㎖）を入れる。' },
+                { number: 3, title: 'エスプレッソ抽出', description: 'カップにエスプレッソを 2杯抽出する。' },
+                { number: 4, title: 'ミルクをスチーム', description: '抽出が完了したら、牛乳　　㎖をスチームする。' },
+                { number: 5, title: '注ぐ', description: 'カップの縁から6㎜くらい下までスチームミルクを注ぐ。', tips: ['フォームミルクをスプーンなどで避けながら注ぐ。'] },
+                { number: 6, title: '仕上げ', description: 'フォームミルクをカップの縁まで乗せる。' }
             ],
-            troubleshooting: [
-                { problem: '香りが弱い', solution: 'シロップ量を確認し、抽出直後に混ぜる。' },
-                { problem: '薄く感じる', solution: 'ショットの抽出時間を25〜30秒に調整。' }
-            ],
-            qualityStandards: [
-                'バニラの香りが立ち、ミルクは滑らか',
-                'フォームは白く均一',
-                '提供1分以内'
-            ],
-            variations: [
-                'ホイップ追加でデザート風',
-                'アイスはシロップを先にしっかり溶かす'
-            ],
-            cleaning: [
-                'シロップポンプはベタつきを拭き取る',
-                'スチームノズルは毎回空打ち'
-            ],
-            references: ['Campus Cafe Proposal：商品オペレーション']
+            troubleshooting: [],
+            qualityStandards: [],
+            variations: [],
+            cleaning: [],
+            references: []
         },
         whiteMocha: {
             id: 'whiteMocha',
             name: 'ホワイトモカ',
             englishName: 'White Mocha',
             category: 'ラテメニュー',
-            price: null,
+            price: 400,
             volume: '約240mL（HOT/ICE）',
             duration: '約1分',
             ingredients: [
-                'ホワイトチョコソース 1プッシュ',
-                'エスプレッソ 2ショット',
-                'ミルク 180mL'
+                'エスプレッソ',
+                'ホワイトチョコソース',
+                'ミルク',
+                'ホイップ'
             ],
             equipment: [
                 'エスプレッソマシン',
@@ -215,207 +162,143 @@ const initialData = {
                 'カップ（ホット/アイス）'
             ],
             allergens: ['乳'],
-            warnings: [
-                'ソースは甘味が強いので分量厳守',
-                'ホットは温度を上げすぎると甘さがぼやける'
-            ],
+            warnings: [],
             steps: [
-                { number: 1, title: 'ソースをセット', description: 'カップにホワイトチョコソース1プッシュ。アイスは氷を先にグラスへ。', tips: ['ソースは底に広げる'] },
-                { number: 2, title: 'エスプレッソ抽出', description: 'ダブルショットを直接抽出し、ソースとなじませる。', tips: ['抽出後に1〜2回混ぜる'] },
-                { number: 3, title: 'ミルクをスチーム', description: '60〜65℃でスチームし、なめらかなフォームを用意。', tips: ['スチーム中は大きな気泡をつぶす'] },
-                { number: 4, title: '注ぐ', description: 'ミルクを注ぎフォームで仕上げる。アイスは氷の上に注ぐ。', tips: ['甘さを活かすためフォームは薄め'] }
+                { number: 1, title: '豆をセット', description: 'コーヒー豆を付属スプーン２杯（　g）をマシンに投入する。' },
+                { number: 2, title: 'ソースを入れる', description: 'カップにホワイトチョコレートソースを　　　㎖入れる。' },
+                { number: 3, title: 'エスプレッソ抽出', description: 'カップにエスプレッソを 2杯抽出する。', tips: ['ソースとよく混ぜる。'] },
+                { number: 4, title: 'ミルクをスチーム', description: '抽出が完了したら、牛乳　　㎖をスチームする。' },
+                { number: 5, title: '注ぐ', description: 'カップの縁から12㎜くらい下までスチームミルクを注ぐ。', tips: ['フォームミルクをスプーンなどで避けながら注ぐ。'] },
+                { number: 6, title: 'ホイップ', description: 'ホイップ（　周）をのせる。' }
             ],
-            troubleshooting: [
-                { problem: '甘さが強い', solution: 'ソースを半プッシュにし、ミルクをやや多めに。' },
-                { problem: '味がぼやける', solution: '提供直前に軽く混ぜて温度を均一にする。' }
-            ],
-            qualityStandards: [
-                'ホワイトチョコの甘みが感じられる',
-                'フォームはきめ細かい',
-                '提供1分以内'
-            ],
-            variations: [
-                '仕上げにホワイトチョコソースを少量追いがけ',
-                'アイスは氷多めで後味を軽く'
-            ],
-            cleaning: [
-                'ソースポンプのノズルを拭き、固化を防ぐ',
-                'スチームノズルは毎回空打ち'
-            ],
-            references: ['Campus Cafe Proposal：商品オペレーション']
+            troubleshooting: [],
+            qualityStandards: [],
+            variations: [],
+            cleaning: [],
+            references: []
         },
         chaiLatte: {
             id: 'chaiLatte',
             name: 'チャイラテ',
             englishName: 'Chai Latte',
             category: 'ラテメニュー',
-            price: null,
+            price: 500,
             volume: '約240mL（HOT/ICE）',
             duration: '約1分',
             ingredients: [
-                'チャイシロップ 1プッシュ',
-                'お湯 少量（シロップを溶く用）',
-                'エスプレッソ 2ショット',
-                'ミルク 180mL'
+                'チャイシロップ',
+                'お湯',
+                'ミルク'
             ],
             equipment: [
-                'エスプレッソマシン',
                 'スチームノズルとミルクピッチャー',
                 'カップ（ホット/アイス）'
             ],
             allergens: ['乳'],
-            warnings: [
-                'チャイシロップは沈みやすいので最初に溶かす',
-                'スパイスが強いので量は厳守'
-            ],
+            warnings: [],
             steps: [
-                { number: 1, title: 'チャイベース', description: 'カップにチャイシロップ1プッシュとお湯少量を入れ、軽く溶く。アイスは氷入りグラスに同様に準備。', tips: ['濃さはお湯の量で微調整'] },
-                { number: 2, title: 'エスプレッソ抽出', description: 'チャイベースの上からダブルショットを抽出。', tips: ['抽出後は軽く混ぜる'] },
-                { number: 3, title: 'ミルクをスチーム', description: 'ミルクを60〜65℃でスチームし、フォームを作る。', tips: ['フォームは薄く、香りを残す'] },
-                { number: 4, title: '注ぐ', description: 'スチームミルクを注ぎ、フォームで仕上げる。アイスは氷の上に注ぐ。', tips: ['シナモンパウダーを少量振ってもOK'] }
+                { number: 1, title: 'ミルクをスチーム', description: '牛乳　　㎖（普通のラテより半分少なめ）をスチームする。' },
+                { number: 2, title: 'シロップ', description: 'カップにチャイシロップ　　㎖を入れる。' },
+                { number: 3, title: 'お湯', description: 'カップの半分くらいまでお湯を入れる。' },
+                { number: 4, title: '注ぐ', description: 'カップの縁から6㎜くらい下までスチームミルクを注ぐ。', tips: ['フォームミルクをスプーンなどで避けながら注ぐ。'] },
+                { number: 5, title: '仕上げ', description: 'フォームミルクをカップの縁まで乗せる。' }
             ],
-            troubleshooting: [
-                { problem: 'スパイスが強い', solution: 'チャイシロップを半量にし、ミルクを多めに。' },
-                { problem: '甘さが足りない', solution: 'ガムシロを追加またはシロップを1.5プッシュに調整。' }
-            ],
-            qualityStandards: [
-                'チャイの香りが立ち、バランスの良い甘さ',
-                'フォームは滑らか',
-                '提供1分以内'
-            ],
-            variations: [
-                'シナモン・ナツメグを好みで少量トッピング',
-                'アイスは氷を多めにしてすっきり仕上げ'
-            ],
-            cleaning: [
-                'スパイスシロップのベタつきを拭き取る',
-                'スチームノズルは毎回空打ち'
-            ],
-            references: ['Campus Cafe Proposal：商品オペレーション']
+            troubleshooting: [],
+            qualityStandards: [],
+            variations: [],
+            cleaning: [],
+            references: []
         },
         matchaLatte: {
             id: 'matchaLatte',
             name: '抹茶ラテ',
             englishName: 'Matcha Latte',
             category: 'ラテメニュー',
-            price: null,
+            price: 500,
             volume: '約240mL（HOT/ICE）',
             duration: '約1分',
             ingredients: [
-                'バニラシロップ 1プッシュ',
-                '抹茶パウダー 小さじ1',
-                'お湯 少量（抹茶を溶く用）',
-                'エスプレッソ 2ショット',
-                'ミルク 180mL'
+                'バニラシロップ',
+                '抹茶パウダー',
+                'お湯',
+                'ミルク'
             ],
             equipment: [
-                'エスプレッソマシン',
                 'スチームノズルとミルクピッチャー',
                 '小さなスプーンまたはミニホイッパー',
                 'カップ（ホット/アイス）'
             ],
             allergens: ['乳'],
-            warnings: [
-                '抹茶はダマになりやすいのでお湯でしっかり溶く',
-                'ホットは温度を上げすぎると抹茶の香りが飛ぶ'
-            ],
+            warnings: [],
             steps: [
-                { number: 1, title: '抹茶ベース', description: 'カップにバニラシロップ1プッシュと抹茶パウダー小さじ1、お湯少量を入れてよく溶かす。アイスは氷入りグラスで同様に作る。', tips: ['ダマが残らないよう丁寧に溶く'] },
-                { number: 2, title: 'エスプレッソ抽出', description: '抹茶ベースの上にダブルショットを抽出。', tips: ['抽出後に軽く混ぜると色が均一になる'] },
-                { number: 3, title: 'ミルクをスチーム', description: 'ミルクを60〜65℃でスチームし、フォームを用意。', tips: ['抹茶の香りを残すため過加熱しない'] },
-                { number: 4, title: '注ぐ・仕上げ', description: 'ミルクを注ぎフォームで蓋をする。アイスは氷の上に注ぐ。仕上げに抹茶をひとふりしてもOK。', tips: ['フォームは薄めでOK'] }
+                { number: 1, title: 'ミルクをスチーム', description: '牛乳　　㎖（普通のラテより半分少なめ）をスチームする。' },
+                { number: 2, title: 'シロップ・抹茶', description: 'カップにバニラシロップ　　㎖、抹茶パウダー　　g を入れる。' },
+                { number: 3, title: 'お湯', description: 'カップの半分くらいまでお湯を入れて、よく混ぜる。' },
+                { number: 4, title: '注ぐ', description: 'カップの縁から6㎜くらい下までスチームミルクを注ぐ。', tips: ['フォームミルクをスプーンなどで避けながら注ぐ。'] },
+                { number: 5, title: '仕上げ', description: 'フォームミルクをカップの縁まで乗せる。' }
             ],
-            troubleshooting: [
-                { problem: '抹茶がダマになる', solution: 'お湯の量を少し増やし、ホイッパーで溶く。' },
-                { problem: '色が薄い', solution: '抹茶パウダーを小さじ1/2追加。' }
-            ],
-            qualityStandards: [
-                '抹茶の香りが立ち、色味は鮮やかな緑',
-                'フォームはきめ細かい',
-                '提供1分以内'
-            ],
-            variations: [
-                '甘さ控えめはバニラシロップ半量',
-                'アイスは抹茶を先にしっかり溶いてから氷を入れる'
-            ],
-            cleaning: [
-                '抹茶が付いた器具はすぐに水洗い',
-                'スチームノズルは毎回空打ち'
-            ],
-            references: ['Campus Cafe Proposal：商品オペレーション']
+            troubleshooting: [],
+            qualityStandards: [],
+            variations: [],
+            cleaning: [],
+            references: []
         },
         hojichaLatte: {
             id: 'hojichaLatte',
             name: 'ほうじ茶ラテ',
             englishName: 'Hojicha Latte',
             category: 'ラテメニュー',
-            price: null,
+            price: 500,
             volume: '約240mL（HOT/ICE）',
             duration: '約1分',
             ingredients: [
-                'バニラシロップ 1プッシュ',
-                'ほうじ茶パウダー 小さじ1',
-                'お湯 少量（パウダーを溶く用）',
-                'エスプレッソ 2ショット',
-                'ミルク 180mL'
+                'ホワイトチョコソース',
+                'ほうじ茶パウダー',
+                'お湯',
+                'ミルク'
             ],
             equipment: [
-                'エスプレッソマシン',
                 'スチームノズルとミルクピッチャー',
                 '小さなスプーンまたはミニホイッパー',
                 'カップ（ホット/アイス）'
             ],
             allergens: ['乳'],
-            warnings: [
-                'ほうじ茶パウダーはダマになりやすいのでお湯で溶く',
-                '香りが飛びやすいので温度を上げすぎない'
-            ],
+            warnings: [],
             steps: [
-                { number: 1, title: 'ほうじ茶ベース', description: 'カップにバニラシロップ1プッシュとほうじ茶パウダー小さじ1、お湯少量を入れよく溶く。アイスは氷入りグラスで同様に。', tips: ['パウダーは底に残さない'] },
-                { number: 2, title: 'エスプレッソ抽出', description: 'ベースの上からダブルショットを抽出。', tips: ['抽出後に軽く混ぜて香りをなじませる'] },
-                { number: 3, title: 'ミルクをスチーム', description: 'ミルクを60〜65℃でスチームし、フォームを用意。', tips: ['香ばしさを残すため温度は控えめ'] },
-                { number: 4, title: '注ぐ・仕上げ', description: 'ミルクを注ぎフォームで仕上げる。アイスは氷の上に注ぐ。', tips: ['仕上げにほうじ茶パウダーをひとふりしてもOK'] }
+                { number: 1, title: 'ミルクをスチーム', description: '牛乳　　㎖（普通のラテより半分少なめ）をスチームする。' },
+                { number: 2, title: 'ソース・パウダー', description: 'カップにホワイトチョコソース　　㎖、ほうじ茶パウダー　　g を入れる。' },
+                { number: 3, title: 'お湯', description: 'カップの半分くらいまでお湯を入れて、よく混ぜる。' },
+                { number: 4, title: '注ぐ', description: 'カップの縁から6㎜くらい下までスチームミルクを注ぐ。', tips: ['フォームミルクをスプーンなどで避けながら注ぐ。'] },
+                { number: 5, title: '仕上げ', description: 'フォームミルクをカップの縁まで乗せる。' }
             ],
-            troubleshooting: [
-                { problem: '香りが弱い', solution: 'パウダー量を小さじ1.5に調整するか、抽出後すぐ提供。' },
-                { problem: 'ダマが残る', solution: 'お湯を少量追加しよく溶かす。' }
-            ],
-            qualityStandards: [
-                'ほうじ茶の香ばしさがしっかり感じられる',
-                'フォームは薄く滑らか',
-                '提供1分以内'
-            ],
-            variations: [
-                '甘さ控えめはシロップ半量',
-                'アイスは氷多めで後味を軽く'
-            ],
-            cleaning: [
-                'パウダーが付いた器具はすぐに水洗い',
-                'スチームノズルは毎回空打ち'
-            ],
-            references: ['Campus Cafe Proposal：商品オペレーション']
+            troubleshooting: [],
+            qualityStandards: [],
+            variations: [],
+            cleaning: [],
+            references: []
         },
         coffee: {
             id: 'coffee',
             name: 'コーヒー（HOT / ICE）',
             englishName: 'Coffee',
             category: 'コーヒー・ティー',
-            price: null,
+            price: 300,
             volume: '約240mL（アイスは氷込み）',
             duration: '約1分',
             ingredients: [
-                'コーヒー豆（分量は設定に従う）',
+                'コーヒーメーカー用コーヒー豆（エスプレッソ用とは別の豆）',
                 '水（給水タンクに十分な量）',
                 '氷（アイス用）'
             ],
             equipment: [
-                'コーヒーマシンまたはドリッパー',
+                'コーヒーメーカーまたはドリッパー',
                 'カップ（ホット）、グラス＋氷（アイス）'
             ],
             allergens: ['特定原材料なし'],
             warnings: [
                 '抽出中は本体を動かさない',
-                'アイスは氷を先にグラスへ入れて急冷する'
+                'アイスは氷を先にグラスへ入れて急冷する',
+                'エスプレッソマシンとは違う豆を使用する'
             ],
             steps: [
                 { number: 1, title: '準備', description: '豆をセットし、給水タンクに水を入れる。アイスはグラスに氷を入れておく。', tips: ['豆量と挽き目を確認'] },
@@ -446,7 +329,7 @@ const initialData = {
             name: 'アールグレイティー',
             englishName: 'Earl Grey Tea',
             category: 'コーヒー・ティー',
-            price: null,
+            price: 300,
             volume: '約240mL（HOT/ICE）',
             duration: '約1分',
             ingredients: [
@@ -487,229 +370,6 @@ const initialData = {
             ],
             references: ['Campus Cafe Proposal：商品オペレーション']
         },
-        whiteChocoParfait: {
-            id: 'whiteChocoParfait',
-            name: 'ホワイトチョコパフェ',
-            englishName: 'White Chocolate Parfait',
-            category: 'パフェ・デザート',
-            price: null,
-            volume: '1人前',
-            duration: '約1分',
-            ingredients: [
-                'バニラアイス 2スクープ',
-                'コーンフレーク 適量',
-                'ホイップクリーム 適量',
-                'ホワイトチョコソース'
-            ],
-            equipment: [
-                'パフェグラス',
-                'アイスディッシャー',
-                'スプーン'
-            ],
-            allergens: ['乳'],
-            warnings: [
-                'アイスが溶けやすいので手早く盛り付け',
-                'グラスの口を汚さないよう丁寧に' 
-            ],
-            steps: [
-                { number: 1, title: '土台', description: 'グラスの底にコーンフレークを適量入れる。', tips: [] },
-                { number: 2, title: 'アイスを盛る', description: 'バニラアイスを2段（2スクープ）重ねる。', tips: ['アイスは潰さずふんわり乗せる'] },
-                { number: 3, title: 'ホイップ', description: 'アイスの周りや上にホイップクリームを絞る。', tips: ['高さを出しすぎない'] },
-                { number: 4, title: 'ソース仕上げ', description: 'ホワイトチョコソースを上からかけて完成。', tips: ['提供直前にかけて溶けを防ぐ'] }
-            ],
-            troubleshooting: [
-                { problem: 'アイスが倒れる', solution: 'フレークの上を平らにし、アイスを垂直に置く。' }
-            ],
-            qualityStandards: [
-                'アイスがしっかり立っている',
-                'ソースが全体に薄く行き渡る',
-                '提供1分以内'
-            ],
-            variations: [
-                'ホイップを増やしてデザート感を強調',
-                'ソースを少量にして甘さを控えめに'
-            ],
-            cleaning: [
-                '使用器具をすぐに水洗いし、ソースの固着を防ぐ'
-            ],
-            references: ['Campus Cafe Proposal：商品オペレーション']
-        },
-        chocoParfait: {
-            id: 'chocoParfait',
-            name: 'チョコパフェ',
-            englishName: 'Chocolate Parfait',
-            category: 'パフェ・デザート',
-            price: null,
-            volume: '1人前',
-            duration: '約1分',
-            ingredients: [
-                'バニラアイス 2スクープ',
-                'コーンフレーク 適量',
-                'ホイップクリーム 適量',
-                'チョコレートソース'
-            ],
-            equipment: [
-                'パフェグラス',
-                'アイスディッシャー',
-                'スプーン'
-            ],
-            allergens: ['乳'],
-            warnings: [
-                'チョコソースは垂れやすいので量に注意',
-                'アイスが溶ける前に提供'
-            ],
-            steps: [
-                { number: 1, title: '土台', description: 'グラスにコーンフレークを入れる。', tips: [] },
-                { number: 2, title: 'アイスを盛る', description: 'バニラアイスを2段重ねる。', tips: ['アイスは中央に置く'] },
-                { number: 3, title: 'ホイップ', description: 'ホイップクリームを絞る。', tips: ['高さを出しすぎない'] },
-                { number: 4, title: 'ソース仕上げ', description: 'チョコソースを上からかけて完成。', tips: ['ソースは細く格子状に'] }
-            ],
-            troubleshooting: [
-                { problem: '甘すぎる', solution: 'ソースを半量にし、ホイップを少なめにする。' }
-            ],
-            qualityStandards: [
-                'チョコの香りとバニラのバランス',
-                '提供1分以内'
-            ],
-            variations: [
-                'ナッツやクッキーを少量トッピング',
-                'ソースを温めず常温で使用'
-            ],
-            cleaning: [
-                'ソース容器の先端を拭き取り固化を防ぐ'
-            ],
-            references: ['Campus Cafe Proposal：商品オペレーション']
-        },
-        caramelParfait: {
-            id: 'caramelParfait',
-            name: 'キャラメルパフェ',
-            englishName: 'Caramel Parfait',
-            category: 'パフェ・デザート',
-            price: null,
-            volume: '1人前',
-            duration: '約1分',
-            ingredients: [
-                'バニラアイス 2スクープ',
-                'コーンフレーク 適量',
-                'ホイップクリーム 適量',
-                'キャラメルソース'
-            ],
-            equipment: [
-                'パフェグラス',
-                'アイスディッシャー',
-                'スプーン'
-            ],
-            allergens: ['乳'],
-            warnings: [
-                'キャラメルソースは粘度が高いのでかけすぎ注意'
-            ],
-            steps: [
-                { number: 1, title: '土台', description: 'グラスにコーンフレークを入れる。', tips: [] },
-                { number: 2, title: 'アイスを盛る', description: 'バニラアイスを2スクープ重ねる。', tips: ['安定するよう中心に置く'] },
-                { number: 3, title: 'ホイップ', description: 'ホイップクリームを絞る。', tips: [] },
-                { number: 4, title: 'ソース仕上げ', description: 'キャラメルソースを上からかけて完成。', tips: ['線を細くしてバランスよく'] }
-            ],
-            troubleshooting: [
-                { problem: '甘さが強い', solution: 'ソース量を減らし、フレークを少し増やす。' }
-            ],
-            qualityStandards: [
-                'キャラメルの香りが立つ',
-                '提供1分以内'
-            ],
-            variations: [
-                'ソースを少なめにし、ホイップを多めにして軽く仕上げ'
-            ],
-            cleaning: [
-                'ソースのベタつきはすぐ拭き取る'
-            ],
-            references: ['Campus Cafe Proposal：商品オペレーション']
-        },
-        waParfait: {
-            id: 'waParfait',
-            name: '和風パフェ',
-            englishName: 'Japanese Parfait',
-            category: 'パフェ・デザート',
-            price: null,
-            volume: '1人前',
-            duration: '約1分',
-            ingredients: [
-                'バニラアイス 2スクープ',
-                'コーンフレーク 適量',
-                'ホイップクリーム 適量',
-                '抹茶系トッピング（抹茶ソースなど）'
-            ],
-            equipment: [
-                'パフェグラス',
-                'アイスディッシャー',
-                'スプーン'
-            ],
-            allergens: ['乳'],
-            warnings: [
-                '抹茶ソースは色ムラになりやすいので薄く広げる'
-            ],
-            steps: [
-                { number: 1, title: '土台', description: 'グラスにコーンフレークを入れる。', tips: [] },
-                { number: 2, title: 'アイスを盛る', description: 'バニラアイスを2スクープ重ねる。', tips: ['高さを出しすぎない'] },
-                { number: 3, title: 'ホイップ', description: 'ホイップクリームを絞る。', tips: [] },
-                { number: 4, title: '抹茶仕上げ', description: '抹茶系ソースやパウダーをかけて完成。', tips: ['パウダーは茶こしで薄く振ると均一'] }
-            ],
-            troubleshooting: [
-                { problem: '抹茶が固まる', solution: 'ソースを常温に戻し、薄く広げる。' }
-            ],
-            qualityStandards: [
-                '抹茶の色味がきれいに出ている',
-                '提供1分以内'
-            ],
-            variations: [
-                '白玉やあんこを追加すると和風感が強まる'
-            ],
-            cleaning: [
-                '抹茶ソースのノズルを拭き取り固着を防ぐ'
-            ],
-            references: ['Campus Cafe Proposal：商品オペレーション']
-        },
-        affogato: {
-            id: 'affogato',
-            name: 'アフォガート',
-            englishName: 'Affogato',
-            category: 'パフェ・デザート',
-            price: null,
-            volume: '1人前',
-            duration: '約1分',
-            ingredients: [
-                'バニラアイス 1〜2スクープ',
-                'エスプレッソ 1ショット'
-            ],
-            equipment: [
-                '小さめのグラスまたはカップ',
-                'エスプレッソマシン'
-            ],
-            allergens: ['乳'],
-            warnings: [
-                'エスプレッソは提供直前に抽出し、熱いまま注ぐ',
-                'グラスが熱で割れないよう耐熱容器を使用'
-            ],
-            steps: [
-                { number: 1, title: 'アイスを盛る', description: 'グラスにバニラアイスを盛り付ける。', tips: ['アイスは崩さず丸く'] },
-                { number: 2, title: 'エスプレッソを注ぐ', description: '提供直前にエスプレッソを抽出し、アイスの上からゆっくり注いで完成。', tips: ['ショットは濃いめに抽出', 'アイスが溶ける前にすぐ提供'] }
-            ],
-            troubleshooting: [
-                { problem: 'アイスがすぐ溶ける', solution: '抽出後すぐ注ぎ、提供を迅速に行う。' }
-            ],
-            qualityStandards: [
-                'バニラとエスプレッソのコントラストがはっきり',
-                '提供1分以内'
-            ],
-            variations: [
-                'チョコやキャラメルソースを少量追加',
-                'アイスを1スクープにして軽めに仕上げ'
-            ],
-            cleaning: [
-                'エスプレッソ抽出口を乾拭き',
-                'グラスは提供後すぐ洗浄'
-            ],
-            references: ['Campus Cafe Proposal：商品オペレーション']
-        }
     },
     cleaning: {
         daily: {
@@ -1410,6 +1070,52 @@ const initialData = {
         }
     },
     service: {
+        customerService: {
+            title: '接客方法',
+            flow: [
+                '入店・お出迎え: 3秒以内に笑顔で「いらっしゃいませ」。目線を合わせ会釈。混雑時も一度は声かけ、手が離せない時は目線＋会釈で気づきを示す。',
+                '席へのご案内: 「何名様ですか？」確認後、「○名様ですね。こちらへどうぞ」と先導。メニュー・お水を出し「ご注文がお決まりになりましたらお呼びください」と添える。',
+                'オーダーを取る: 「お待たせいたしました。ご注文はお決まりでしょうか？」と声かけ。復唱して確認。アレルギー・苦手は必要に応じ補足。',
+                '提供: トレーは両手で安定。商品名を伝え「お待たせいたしました」。熱い飲み物は「カップが熱いのでお気をつけください」を添える。',
+                'テーブルフォロー: 長時間滞在の方へ水や片付けをさりげなく提案。「お下げしてもよろしいでしょうか？」と確認して下げる。',
+                '会計: 「いらっしゃいませ」「ありがとうございます」を明瞭に。注文内容再確認し金額提示。現金/キャッシュレスを丁寧に案内。受け取った金額はレジ画面やレシートで示す。',
+                'お見送り: 「ありがとうございました」「またお待ちしております」と笑顔でお見送り。目線を合わせ軽く会釈。'
+            ],
+            basics: [
+                '笑顔・明るい表情をキープ',
+                'はっきり聞き取りやすい声で話す（声量は周囲に配慮）',
+                '分からないことは「確認してまいります」と伝えてから確認',
+                '誰に対しても公平に接する（常連・友人を特別扱いしない）'
+            ],
+            cautions: {
+                ng: [
+                    '不機嫌・無表情での接客',
+                    'スマホ操作やカウンターにもたれながらの接客',
+                    '私語が多い、特にお客様前や出入口付近',
+                    'オーダーミスの隠蔽（気づいたら即報告・謝罪・作り直し）',
+                    'お客様前でスタッフや店の悪口を言う'
+                ],
+                hygiene: [
+                    '制服・エプロンは清潔に。汚れ・シワは交換',
+                    '爪は短く、ネイルは原則控える（店舗ルール優先）',
+                    '強い香水・柔軟剤は避ける',
+                    '長い髪はまとめ、前髪は目・眉にかからないように',
+                    'レジ→調理→配膳の切替時などこまめに手洗い・消毒'
+                ],
+                order: [
+                    '復唱を徹底し聞き間違い防止',
+                    'アレルギー表示はメニューを指差し確認し説明',
+                    '熱い/こぼれやすい商品は一言注意喚起',
+                    '提供に時間がかかる場合は目安時間を事前に伝える'
+                ],
+                claim: [
+                    '話を最後まで聞き、さえぎらない',
+                    '落ち着いた声で「ご不快な思いをさせ申し訳ございません」と謝罪',
+                    '判断できない場合は責任者・リーダーに報告',
+                    'その場しのぎの約束はしない（守れない約束はしない）'
+                ]
+            }
+        },
         overview: {
             title: '概要',
             content: [

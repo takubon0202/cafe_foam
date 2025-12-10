@@ -125,6 +125,8 @@ function loadData() {
 
     // 提供方法ページをレンダリング
     renderServicePage();
+    renderCustomerServicePage();
+    renderCustomerCautionsPage();
 
     // トラブルシューティングをレンダリング
     renderTroubleshooting();
@@ -958,6 +960,47 @@ function renderServicePage() {
 
     let html = '';
 
+    // 接客方法
+    if (serviceData.customerService) {
+        html += '<div class="service-section">';
+        html += `<h3><i class="fas fa-handshake"></i> ${serviceData.customerService.title}</h3>`;
+
+        if (serviceData.customerService.flow && serviceData.customerService.flow.length) {
+            html += '<h4>接客フロー（基本）</h4><ol>';
+            serviceData.customerService.flow.forEach(item => {
+                html += `<li>${item}</li>`;
+            });
+            html += '</ol>';
+        }
+
+        if (serviceData.customerService.basics && serviceData.customerService.basics.length) {
+            html += '<h4>接客の基本姿勢</h4><ul>';
+            serviceData.customerService.basics.forEach(item => {
+                html += `<li>${item}</li>`;
+            });
+            html += '</ul>';
+        }
+
+        const cautions = serviceData.customerService.cautions || {};
+        const cautionBlocks = [
+            ['接客時のNG行動', cautions.ng],
+            ['衛生・身だしなみの注意', cautions.hygiene],
+            ['オーダー・提供時の注意', cautions.order],
+            ['クレーム・トラブル対応の注意', cautions.claim]
+        ];
+        cautionBlocks.forEach(([title, list]) => {
+            if (list && list.length) {
+                html += `<h4>${title}</h4><ul>`;
+                list.forEach(item => {
+                    html += `<li>${item}</li>`;
+                });
+                html += '</ul>';
+            }
+        });
+
+        html += '</div>';
+    }
+
     // 概要
     if (serviceData.overview) {
         html += '<div class="service-section">';
@@ -1255,6 +1298,63 @@ function renderServicePage() {
     if (typeof mermaid !== 'undefined') {
         mermaid.init(undefined, document.querySelectorAll('.mermaid'));
     }
+}
+
+// 接客方法ページ（独立ページ）
+function renderCustomerServicePage() {
+    const container = document.getElementById('customerServiceContent');
+    if (!container || !serviceData || !serviceData.customerService) return;
+
+    const cs = serviceData.customerService;
+    let html = '';
+
+    if (cs.flow && cs.flow.length) {
+        html += '<div class="service-section">';
+        html += '<h3><i class="fas fa-route"></i> 接客フロー（基本）</h3><ol>';
+        cs.flow.forEach(item => {
+            html += `<li>${item}</li>`;
+        });
+        html += '</ol></div>';
+    }
+
+    if (cs.basics && cs.basics.length) {
+        html += '<div class="service-section">';
+        html += '<h3><i class="fas fa-smile"></i> 接客の基本姿勢</h3><ul>';
+        cs.basics.forEach(item => {
+            html += `<li>${item}</li>`;
+        });
+        html += '</ul></div>';
+    }
+
+    container.innerHTML = html;
+}
+
+// 接客の注意ページ（独立ページ）
+function renderCustomerCautionsPage() {
+    const container = document.getElementById('customerCautionsContent');
+    if (!container || !serviceData || !serviceData.customerService) return;
+
+    const cautions = serviceData.customerService.cautions || {};
+    let html = '';
+
+    const blocks = [
+        ['接客時のNG行動', cautions.ng, 'fa-ban'],
+        ['衛生・身だしなみの注意', cautions.hygiene, 'fa-hand-sparkles'],
+        ['オーダー・提供時の注意', cautions.order, 'fa-clipboard-check'],
+        ['クレーム・トラブル対応の注意', cautions.claim, 'fa-exclamation-triangle'],
+    ];
+
+    blocks.forEach(([title, list, icon]) => {
+        if (!list || !list.length) return;
+        html += '<div class="service-section">';
+        html += `<h3><i class="fas ${icon}"></i> ${title}</h3><ul>`;
+        list.forEach(item => {
+            html += `<li>${item}</li>`;
+        });
+        html += '</ul></div>';
+    });
+
+    container.innerHTML = html;
 }
 
 // ===================================

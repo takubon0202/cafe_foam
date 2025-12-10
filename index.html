@@ -33,10 +33,10 @@
                 <i class="fas fa-home"></i> ホーム
             </a></li>
 
-            <!-- ラテメニュー -->
+            <!-- ラテ -->
             <li class="nav-category">
                 <div class="nav-category-header" onclick="toggleNavCategory(this)">
-                    <i class="fas fa-mug-hot"></i> ラテメニュー
+                    <i class="fas fa-mug-hot"></i> ラテ
                     <i class="fas fa-chevron-down toggle-icon"></i>
                 </div>
                 <ul class="nav-submenu">
@@ -83,37 +83,18 @@
                 </ul>
             </li>
 
-            <!-- パフェ・デザート -->
-            <li class="nav-category">
-                <div class="nav-category-header" onclick="toggleNavCategory(this)">
-                    <i class="fas fa-ice-cream"></i> パフェ・デザート
-                    <i class="fas fa-chevron-down toggle-icon"></i>
-                </div>
-                <ul class="nav-submenu">
-                    <li><a href="#menu-whiteChocoParfait" class="nav-link" data-page="menu-whiteChocoParfait">
-                        <i class="fas fa-ice-cream"></i> ホワイトチョコパフェ
-                    </a></li>
-                    <li><a href="#menu-chocoParfait" class="nav-link" data-page="menu-chocoParfait">
-                        <i class="fas fa-ice-cream"></i> チョコパフェ
-                    </a></li>
-                    <li><a href="#menu-caramelParfait" class="nav-link" data-page="menu-caramelParfait">
-                        <i class="fas fa-ice-cream"></i> キャラメルパフェ
-                    </a></li>
-                    <li><a href="#menu-waParfait" class="nav-link" data-page="menu-waParfait">
-                        <i class="fas fa-ice-cream"></i> 和風パフェ
-                    </a></li>
-                    <li><a href="#menu-affogato" class="nav-link" data-page="menu-affogato">
-                        <i class="fas fa-ice-cream"></i> アフォガート
-                    </a></li>
-                </ul>
-            </li>
-
             <!-- マニュアル・設定 -->
             <li><a href="#service" class="nav-link" data-page="service">
                 <i class="fas fa-store"></i> 提供方法
             </a></li>
             <li><a href="#airpay" class="nav-link" data-page="airpay">
                 <i class="fas fa-credit-card"></i> 決済・AirPay
+            </a></li>
+            <li><a href="#customer-service" class="nav-link" data-page="customer-service">
+                <i class="fas fa-handshake"></i> 接客方法
+            </a></li>
+            <li><a href="#customer-cautions" class="nav-link" data-page="customer-cautions">
+                <i class="fas fa-exclamation-circle"></i> 接客の注意
             </a></li>
             <li><a href="#cleaning" class="nav-link" data-page="cleaning">
                 <i class="fas fa-broom"></i> 清掃マニュアル
@@ -186,6 +167,24 @@
                     <h3>決済・AirPay</h3>
                     <p>キャッシュレス対応と動画マニュアル</p>
                 </div>
+
+                <!-- 接客方法カード -->
+                <div class="main-menu-card" onclick="navigateToPage('customer-service')">
+                    <div class="main-menu-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>接客方法</h3>
+                    <p>接客フローと基本姿勢</p>
+                </div>
+
+                <!-- 接客の注意カード -->
+                <div class="main-menu-card" onclick="navigateToPage('customer-cautions')">
+                    <div class="main-menu-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <h3>接客の注意</h3>
+                    <p>NG行動・衛生・クレーム対応</p>
+                </div>
             </div>
 
             <!-- 今日の清掃チェックリスト -->
@@ -213,7 +212,7 @@
 
             <div class="dashboard-grid">
                 <div class="section-card">
-                    <h3><i class="fas fa-mug-hot"></i> ラテメニュー</h3>
+                    <h3><i class="fas fa-mug-hot"></i> ラテ</h3>
                     <div class="menu-buttons">
                         <button class="menu-btn" data-page="menu-cafeLatte">
                             <i class="fas fa-mug-hot"></i>
@@ -274,31 +273,6 @@
                     </div>
                 </div>
 
-                <div class="section-card">
-                    <h3><i class="fas fa-ice-cream"></i> パフェ・デザート</h3>
-                    <div class="menu-buttons">
-                        <button class="menu-btn" data-page="menu-whiteChocoParfait">
-                            <i class="fas fa-ice-cream"></i>
-                            <span>ホワイトチョコパフェ</span>
-                        </button>
-                        <button class="menu-btn" data-page="menu-chocoParfait">
-                            <i class="fas fa-ice-cream"></i>
-                            <span>チョコパフェ</span>
-                        </button>
-                        <button class="menu-btn" data-page="menu-caramelParfait">
-                            <i class="fas fa-ice-cream"></i>
-                            <span>キャラメルパフェ</span>
-                        </button>
-                        <button class="menu-btn" data-page="menu-waParfait">
-                            <i class="fas fa-ice-cream"></i>
-                            <span>和風パフェ</span>
-                        </button>
-                        <button class="menu-btn" data-page="menu-affogato">
-                            <i class="fas fa-ice-cream"></i>
-                            <span>アフォガート</span>
-                        </button>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -314,7 +288,7 @@
             </div>
 
             <div class="menu-info">
-                <div class="info-card"><h4>価格</h4><p class="price">価格未設定</p></div>
+                <div class="info-card"><h4>価格</h4><p class="price">400円</p></div>
                 <div class="info-card"><h4>容量</h4><p>約240mL（HOT/ICE）</p></div>
                 <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
             </div>
@@ -334,7 +308,7 @@
             </div>
 
             <div class="menu-info">
-                <div class="info-card"><h4>価格</h4><p class="price">価格未設定</p></div>
+                <div class="info-card"><h4>価格</h4><p class="price">400円</p></div>
                 <div class="info-card"><h4>容量</h4><p>約240mL（HOT/ICE）</p></div>
                 <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
             </div>
@@ -354,7 +328,7 @@
             </div>
 
             <div class="menu-info">
-                <div class="info-card"><h4>価格</h4><p class="price">価格未設定</p></div>
+                <div class="info-card"><h4>価格</h4><p class="price">400円</p></div>
                 <div class="info-card"><h4>容量</h4><p>約240mL（HOT/ICE）</p></div>
                 <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
             </div>
@@ -374,7 +348,7 @@
             </div>
 
             <div class="menu-info">
-                <div class="info-card"><h4>価格</h4><p class="price">価格未設定</p></div>
+                <div class="info-card"><h4>価格</h4><p class="price">400円</p></div>
                 <div class="info-card"><h4>容量</h4><p>約240mL（HOT/ICE）</p></div>
                 <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
             </div>
@@ -394,7 +368,7 @@
             </div>
 
             <div class="menu-info">
-                <div class="info-card"><h4>価格</h4><p class="price">価格未設定</p></div>
+                <div class="info-card"><h4>価格</h4><p class="price">400円</p></div>
                 <div class="info-card"><h4>容量</h4><p>約240mL（HOT/ICE）</p></div>
                 <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
             </div>
@@ -414,7 +388,7 @@
             </div>
 
             <div class="menu-info">
-                <div class="info-card"><h4>価格</h4><p class="price">価格未設定</p></div>
+                <div class="info-card"><h4>価格</h4><p class="price">500円</p></div>
                 <div class="info-card"><h4>容量</h4><p>約240mL（HOT/ICE）</p></div>
                 <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
             </div>
@@ -434,7 +408,7 @@
             </div>
 
             <div class="menu-info">
-                <div class="info-card"><h4>価格</h4><p class="price">価格未設定</p></div>
+                <div class="info-card"><h4>価格</h4><p class="price">500円</p></div>
                 <div class="info-card"><h4>容量</h4><p>約240mL（HOT/ICE）</p></div>
                 <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
             </div>
@@ -454,7 +428,7 @@
             </div>
 
             <div class="menu-info">
-                <div class="info-card"><h4>価格</h4><p class="price">価格未設定</p></div>
+                <div class="info-card"><h4>価格</h4><p class="price">500円</p></div>
                 <div class="info-card"><h4>容量</h4><p>約240mL（HOT/ICE）</p></div>
                 <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
             </div>
@@ -473,7 +447,7 @@
                 </div>
             </div>
             <div class="menu-info">
-                <div class="info-card"><h4>価格</h4><p class="price">価格未設定</p></div>
+                <div class="info-card"><h4>価格</h4><p class="price">300円</p></div>
                 <div class="info-card"><h4>容量</h4><p>約240mL（アイスは氷込み）</p></div>
                 <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
             </div>
@@ -491,102 +465,13 @@
                 </div>
             </div>
             <div class="menu-info">
-                <div class="info-card"><h4>価格</h4><p class="price">価格未設定</p></div>
+                <div class="info-card"><h4>価格</h4><p class="price">300円</p></div>
                 <div class="info-card"><h4>容量</h4><p>約240mL（HOT/ICE）</p></div>
                 <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
             </div>
             <div class="menu-content" id="earlGreyTeaContent"></div>
         </section>
 
-        <!-- ホワイトチョコパフェ -->
-        <section id="menu-whiteChocoParfait" class="page menu-page">
-            <div class="page-header">
-                <h2><i class="fas fa-ice-cream"></i> ホワイトチョコパフェ</h2>
-                <div class="page-actions">
-                    <button class="btn btn-secondary" onclick="window.print()">
-                        <i class="fas fa-print"></i> 印刷
-                    </button>
-                </div>
-            </div>
-            <div class="menu-info">
-                <div class="info-card"><h4>価格</h4><p class="price">価格未設定</p></div>
-                <div class="info-card"><h4>容量</h4><p>1人前</p></div>
-                <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
-            </div>
-            <div class="menu-content" id="whiteChocoParfaitContent"></div>
-        </section>
-
-        <!-- チョコパフェ -->
-        <section id="menu-chocoParfait" class="page menu-page">
-            <div class="page-header">
-                <h2><i class="fas fa-ice-cream"></i> チョコパフェ</h2>
-                <div class="page-actions">
-                    <button class="btn btn-secondary" onclick="window.print()">
-                        <i class="fas fa-print"></i> 印刷
-                    </button>
-                </div>
-            </div>
-            <div class="menu-info">
-                <div class="info-card"><h4>価格</h4><p class="price">価格未設定</p></div>
-                <div class="info-card"><h4>容量</h4><p>1人前</p></div>
-                <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
-            </div>
-            <div class="menu-content" id="chocoParfaitContent"></div>
-        </section>
-
-        <!-- キャラメルパフェ -->
-        <section id="menu-caramelParfait" class="page menu-page">
-            <div class="page-header">
-                <h2><i class="fas fa-ice-cream"></i> キャラメルパフェ</h2>
-                <div class="page-actions">
-                    <button class="btn btn-secondary" onclick="window.print()">
-                        <i class="fas fa-print"></i> 印刷
-                    </button>
-                </div>
-            </div>
-            <div class="menu-info">
-                <div class="info-card"><h4>価格</h4><p class="price">価格未設定</p></div>
-                <div class="info-card"><h4>容量</h4><p>1人前</p></div>
-                <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
-            </div>
-            <div class="menu-content" id="caramelParfaitContent"></div>
-        </section>
-
-        <!-- 和風パフェ -->
-        <section id="menu-waParfait" class="page menu-page">
-            <div class="page-header">
-                <h2><i class="fas fa-ice-cream"></i> 和風パフェ</h2>
-                <div class="page-actions">
-                    <button class="btn btn-secondary" onclick="window.print()">
-                        <i class="fas fa-print"></i> 印刷
-                    </button>
-                </div>
-            </div>
-            <div class="menu-info">
-                <div class="info-card"><h4>価格</h4><p class="price">価格未設定</p></div>
-                <div class="info-card"><h4>容量</h4><p>1人前</p></div>
-                <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
-            </div>
-            <div class="menu-content" id="waParfaitContent"></div>
-        </section>
-
-        <!-- アフォガート -->
-        <section id="menu-affogato" class="page menu-page">
-            <div class="page-header">
-                <h2><i class="fas fa-ice-cream"></i> アフォガート</h2>
-                <div class="page-actions">
-                    <button class="btn btn-secondary" onclick="window.print()">
-                        <i class="fas fa-print"></i> 印刷
-                    </button>
-                </div>
-            </div>
-            <div class="menu-info">
-                <div class="info-card"><h4>価格</h4><p class="price">価格未設定</p></div>
-                <div class="info-card"><h4>容量</h4><p>1人前</p></div>
-                <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
-            </div>
-            <div class="menu-content" id="affogatoContent"></div>
-        </section>
 <!-- 清掃マニュアル -->
         <section id="cleaning" class="page">
             <div class="page-header">
@@ -673,6 +558,32 @@
             </div>
 
             <div class="service-content" id="serviceContent"></div>
+        </section>
+
+        <!-- 接客方法 -->
+        <section id="customer-service" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-handshake"></i> 接客方法</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="service-content" id="customerServiceContent"></div>
+        </section>
+
+        <!-- 接客の注意 -->
+        <section id="customer-cautions" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-exclamation-circle"></i> 接客の注意</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="service-content" id="customerCautionsContent"></div>
         </section>
 
         <!-- AirPayマニュアル -->
