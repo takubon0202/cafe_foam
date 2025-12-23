@@ -88,6 +88,11 @@ function loadData() {
             };
         });
 
+        // 営業時間は最新の初期データを優先（上書き）
+        if (initialData.service.hours) {
+            serviceData.hours = initialData.service.hours;
+        }
+
         // 重要フィールド（画像・レイアウト）は常に最新の初期データを優先
         if (initialData.service.layout?.image) {
             serviceData.layout.image = initialData.service.layout.image;

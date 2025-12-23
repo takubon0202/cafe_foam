@@ -9,26 +9,28 @@ const initialData = {
             name: 'カフェラテ',
             englishName: 'Cafe Latte',
             category: 'ラテメニュー',
+            difficulty: 1,
             price: 400,
             volume: '約240mL（HOT/ICE）',
             duration: '約1分',
             ingredients: [
-                'エスプレッソ',
-                'ミルク'
+                'コーヒー豆（すり切り2杯）',
+                '牛乳 100ml'
             ],
             equipment: [
                 'エスプレッソマシン',
-                'スチームノズルとミルクピッチャー',
-                'カップ（ホット/アイス）'
+                '電子レンジ',
+                'ミルクフォーマー',
+                'カップ'
             ],
             allergens: ['乳'],
             warnings: [],
             steps: [
-                { number: 1, title: '豆をセット', description: 'コーヒー豆を付属スプーン２杯（　g）をマシンに投入する。' },
-                { number: 2, title: 'エスプレッソ抽出', description: 'カップにエスプレッソを 2杯抽出する。' },
-                { number: 3, title: 'ミルクをスチーム', description: '抽出が完了したら、牛乳　　㎖をスチームする。' },
-                { number: 4, title: '注ぐ', description: 'カップの縁から6㎜くらい下までスチームミルクを注ぐ。', tips: ['フォームミルクをスプーンなどで避けながら注ぐ。'] },
-                { number: 5, title: '仕上げ', description: 'フォームミルクをカップの縁まで乗せる。' }
+                { number: 1, title: '豆をセット', description: 'マシンに豆をすり切り2杯入れる。' },
+                { number: 2, title: 'エスプレッソ抽出', description: '3つの量のボタンのうち、真ん中を押して抽出する。' },
+                { number: 3, title: 'ミルクを温める', description: '牛乳100mlをレンジで温める。', tips: ['スタート押すだけ！！'] },
+                { number: 4, title: 'ミルクをスチーム', description: '温めたミルクをフォーマーでスチームする。', tips: ['泡がきめ細かくなるまで、20秒程'] },
+                { number: 5, title: '仕上げ', description: 'カップの縁いっぱいにミルクを注いで完成。' }
             ],
             troubleshooting: [],
             qualityStandards: [],
@@ -41,29 +43,31 @@ const initialData = {
             name: 'カフェモカ',
             englishName: 'Cafe Mocha',
             category: 'ラテメニュー',
+            difficulty: 2,
             price: 400,
             volume: '約240mL（HOT/ICE）',
             duration: '約1分',
             ingredients: [
-                'エスプレッソ',
-                'チョコレートソース',
-                'ミルク',
+                'コーヒー豆（すり切り2杯）',
+                'チョコソース 30cc',
+                '牛乳 200ml',
                 'ホイップ'
             ],
             equipment: [
                 'エスプレッソマシン',
-                'スチームノズルとミルクピッチャー',
-                'カップ（ホット/アイス）'
+                '電子レンジ',
+                'カップ'
             ],
             allergens: ['乳'],
             warnings: [],
             steps: [
-                { number: 1, title: '豆をセット', description: 'コーヒー豆を付属スプーン２杯（　g）をマシンに投入する。' },
-                { number: 2, title: 'ソースを入れる', description: 'カップにチョコレートソースを　　　㎖入れる。' },
-                { number: 3, title: 'エスプレッソ抽出', description: 'カップにエスプレッソを 2杯抽出する。', tips: ['ソースとよく混ぜる。'] },
-                { number: 4, title: 'ミルクをスチーム', description: '抽出が完了したら、牛乳　　㎖をスチームする。' },
-                { number: 5, title: '注ぐ', description: 'カップの縁から12㎜くらい下までスチームミルクを注ぐ。', tips: ['フォームミルクをスプーンなどで避けながら注ぐ。'] },
-                { number: 6, title: 'ホイップ', description: 'ホイップ（　周）をのせる。' }
+                { number: 1, title: '豆をセット', description: 'マシンに豆をすり切り2杯入れる。' },
+                { number: 2, title: 'ソースを入れる', description: 'チョコソースを30ccカップに入れる。' },
+                { number: 3, title: 'エスプレッソ抽出', description: '3つの量のボタンのうち、最小を押してソースの入ったカップに抽出する。' },
+                { number: 4, title: '混ぜる', description: 'しっかり目に混ぜる。' },
+                { number: 5, title: 'ミルクを温める', description: '牛乳200mlをレンジで温める。', tips: ['飲み物→スタート'] },
+                { number: 6, title: '注ぐ', description: 'カップにミルクをカップの縁から12mm下まで注ぐ。' },
+                { number: 7, title: '仕上げ', description: 'ホイップをのせて完成。' }
             ],
             troubleshooting: [],
             qualityStandards: [],
@@ -76,31 +80,33 @@ const initialData = {
             name: 'キャラメルマキアート',
             englishName: 'Caramel Macchiato',
             category: 'ラテメニュー',
+            difficulty: 3,
             price: 400,
             volume: '約240mL（HOT/ICE）',
-            duration: '約1分',
+            duration: '約2分',
             ingredients: [
-                'エスプレッソ',
-                'バニラシロップ',
-                'ミルク',
-                'キャラメルソース'
+                'コーヒー豆（すり切り2杯）',
+                'バニラシロップ 10cc（ポンプ2プッシュ）',
+                'キャラメルソース 20cc',
+                '牛乳 90ml'
             ],
             equipment: [
                 'エスプレッソマシン',
-                'スチームノズルとミルクピッチャー',
-                'カップ（ホット/アイス）'
+                '電子レンジ',
+                'ミルクフォーマー',
+                'カップ'
             ],
             allergens: ['乳'],
             warnings: [],
             steps: [
-                { number: 1, title: '豆をセット', description: 'コーヒー豆を付属スプーン２杯（　g）をマシンに投入する。' },
-                { number: 2, title: 'エスプレッソを別容器に抽出', description: '別容器にエスプレッソを 2杯抽出する。' },
-                { number: 3, title: 'バニラシロップ', description: 'カップにバニラシロップを　　　㎖入れる。' },
-                { number: 4, title: 'ミルクをスチーム', description: '牛乳　　㎖をスチームする。' },
-                { number: 5, title: 'ミルクを注ぐ', description: 'カップの 3/4 くらいまでスチームミルクを注ぐ。', tips: ['フォームミルクをスプーンなどで避けながら注ぐ。'] },
-                { number: 6, title: 'フォーム', description: 'フォームミルクを少なめに乗せる。' },
-                { number: 7, title: 'エスプレッソを注ぐ', description: '抽出しておいたエスプレッソを注ぐ。' },
-                { number: 8, title: 'キャラメルソース', description: 'キャラメルソースをおしゃれにかける。' }
+                { number: 1, title: '豆をセット', description: 'マシンに豆をすり切り2杯入れる。' },
+                { number: 2, title: 'シロップを入れる', description: 'バニラシロップ10cc（ポンプ2プッシュ）、キャラメル20ccをカップに入れる。' },
+                { number: 3, title: 'ミルクを温める', description: '牛乳90mlをレンジで温める。', tips: ['スタート押すだけ！！'] },
+                { number: 4, title: 'ミルクをスチーム', description: '温めたミルクをフォーマーでスチームする。', tips: ['泡がきめ細かくなるまで、20秒程'] },
+                { number: 5, title: 'ミルクを注ぐ', description: 'スチームしたミルクをシロップの入ったカップに注ぐ。' },
+                { number: 6, title: '混ぜる', description: 'よく混ぜる！！' },
+                { number: 7, title: 'エスプレッソ抽出', description: '3つの量のボタンのうち、真ん中を押してミルクの入ったカップに抽出する。' },
+                { number: 8, title: '仕上げ', description: '仕上げにキャラメルソースをいい感じにかけて完成。' }
             ],
             troubleshooting: [],
             qualityStandards: [],
@@ -113,28 +119,30 @@ const initialData = {
             name: 'バニララテ',
             englishName: 'Vanilla Latte',
             category: 'ラテメニュー',
+            difficulty: 2,
             price: 400,
             volume: '約240mL（HOT/ICE）',
             duration: '約1分',
             ingredients: [
-                'エスプレッソ',
-                'バニラシロップ',
-                'ミルク'
+                'コーヒー豆（すり切り1杯）',
+                'バニラシロップ 20cc（ポンプ4プッシュ）',
+                '牛乳 250ml'
             ],
             equipment: [
                 'エスプレッソマシン',
-                'スチームノズルとミルクピッチャー',
-                'カップ（ホット/アイス）'
+                '電子レンジ',
+                'ミルクフォーマー',
+                'カップ'
             ],
             allergens: ['乳'],
             warnings: [],
             steps: [
-                { number: 1, title: '豆をセット', description: 'コーヒー豆を付属スプーン２杯（　g）をマシンに投入する。' },
-                { number: 2, title: 'シロップ', description: 'カップにバニラシロップ（　　㎖）を入れる。' },
-                { number: 3, title: 'エスプレッソ抽出', description: 'カップにエスプレッソを 2杯抽出する。' },
-                { number: 4, title: 'ミルクをスチーム', description: '抽出が完了したら、牛乳　　㎖をスチームする。' },
-                { number: 5, title: '注ぐ', description: 'カップの縁から6㎜くらい下までスチームミルクを注ぐ。', tips: ['フォームミルクをスプーンなどで避けながら注ぐ。'] },
-                { number: 6, title: '仕上げ', description: 'フォームミルクをカップの縁まで乗せる。' }
+                { number: 1, title: '豆をセット', description: 'マシンに豆をすり切り1杯入れる。' },
+                { number: 2, title: 'シロップを入れる', description: 'バニラシロップ20cc（ポンプ4プッシュ）をカップに入れる。' },
+                { number: 3, title: 'エスプレッソ抽出', description: '3つの量のボタンのうち、最小を押してシロップの入ったカップに抽出する。' },
+                { number: 4, title: 'ミルクを温める', description: '牛乳250mlをレンジで温める。', tips: ['飲み物→スタート'] },
+                { number: 5, title: 'ミルクをスチーム', description: '温めたミルクをフォーマーでスチームする。', tips: ['泡がきめ細かくなるまで、20秒程'] },
+                { number: 6, title: '仕上げ', description: 'カップの縁いっぱいにミルクを注いで完成。' }
             ],
             troubleshooting: [],
             qualityStandards: [],
@@ -147,29 +155,32 @@ const initialData = {
             name: 'ホワイトモカ',
             englishName: 'White Mocha',
             category: 'ラテメニュー',
+            difficulty: 2,
             price: 400,
             volume: '約240mL（HOT/ICE）',
             duration: '約1分',
             ingredients: [
-                'エスプレッソ',
-                'ホワイトチョコソース',
-                'ミルク',
+                'コーヒー豆（すり切り2杯）',
+                'ホワイトチョコソース 20cc',
+                'バニラシロップ 10cc',
+                '牛乳 200ml',
                 'ホイップ'
             ],
             equipment: [
                 'エスプレッソマシン',
-                'スチームノズルとミルクピッチャー',
-                'カップ（ホット/アイス）'
+                '電子レンジ',
+                'カップ'
             ],
             allergens: ['乳'],
             warnings: [],
             steps: [
-                { number: 1, title: '豆をセット', description: 'コーヒー豆を付属スプーン２杯（　g）をマシンに投入する。' },
-                { number: 2, title: 'ソースを入れる', description: 'カップにホワイトチョコレートソースを　　　㎖入れる。' },
-                { number: 3, title: 'エスプレッソ抽出', description: 'カップにエスプレッソを 2杯抽出する。', tips: ['ソースとよく混ぜる。'] },
-                { number: 4, title: 'ミルクをスチーム', description: '抽出が完了したら、牛乳　　㎖をスチームする。' },
-                { number: 5, title: '注ぐ', description: 'カップの縁から12㎜くらい下までスチームミルクを注ぐ。', tips: ['フォームミルクをスプーンなどで避けながら注ぐ。'] },
-                { number: 6, title: 'ホイップ', description: 'ホイップ（　周）をのせる。' }
+                { number: 1, title: '豆をセット', description: 'マシンに豆をすり切り2杯入れる。' },
+                { number: 2, title: 'ソースを入れる', description: 'ホワイトチョコソースを20cc、バニラシロップを10ccカップに入れる。' },
+                { number: 3, title: 'エスプレッソ抽出', description: '3つの量のボタンのうち、最小を押してソースの入ったカップに抽出する。' },
+                { number: 4, title: '混ぜる', description: 'しっかり目に混ぜる。' },
+                { number: 5, title: 'ミルクを温める', description: '牛乳200mlをレンジで温める。', tips: ['飲み物→スタート'] },
+                { number: 6, title: '注ぐ', description: 'カップにミルクをカップの縁から12mm下まで注ぐ。' },
+                { number: 7, title: '仕上げ', description: 'ホイップをのせて完成。' }
             ],
             troubleshooting: [],
             qualityStandards: [],
@@ -182,26 +193,28 @@ const initialData = {
             name: 'チャイラテ',
             englishName: 'Chai Latte',
             category: 'ラテメニュー',
+            difficulty: 2,
             price: 500,
             volume: '約240mL（HOT/ICE）',
             duration: '約1分',
             ingredients: [
-                'チャイシロップ',
-                'お湯',
-                'ミルク'
+                'チャイシロップ 40cc',
+                'お湯 100ml',
+                '牛乳 150ml'
             ],
             equipment: [
-                'スチームノズルとミルクピッチャー',
-                'カップ（ホット/アイス）'
+                '電子レンジ',
+                'ミルクフォーマー',
+                'カップ'
             ],
             allergens: ['乳'],
             warnings: [],
             steps: [
-                { number: 1, title: 'ミルクをスチーム', description: '牛乳　　㎖（普通のラテより半分少なめ）をスチームする。' },
-                { number: 2, title: 'シロップ', description: 'カップにチャイシロップ　　㎖を入れる。' },
-                { number: 3, title: 'お湯', description: 'カップの半分くらいまでお湯を入れる。' },
-                { number: 4, title: '注ぐ', description: 'カップの縁から6㎜くらい下までスチームミルクを注ぐ。', tips: ['フォームミルクをスプーンなどで避けながら注ぐ。'] },
-                { number: 5, title: '仕上げ', description: 'フォームミルクをカップの縁まで乗せる。' }
+                { number: 1, title: 'シロップを入れる', description: 'チャイシロップ40ccをカップに入れる。' },
+                { number: 2, title: 'お湯を入れる', description: 'お湯100mlをカップに入れる。' },
+                { number: 3, title: 'ミルクを温める', description: '牛乳150mlをレンジで温める。', tips: ['スタートだけ押す'] },
+                { number: 4, title: 'ミルクをスチーム', description: '温めたミルクをフォーマーでスチームする。', tips: ['泡がきめ細かくなるまで、20秒程'] },
+                { number: 5, title: '仕上げ', description: 'カップの縁いっぱいにミルクを注いで完成。' }
             ],
             troubleshooting: [],
             qualityStandards: [],
@@ -369,6 +382,42 @@ const initialData = {
                 '提供エリアを拭き取り水滴を残さない'
             ],
             references: ['Campus Cafe Proposal：商品オペレーション']
+        },
+        teaLatte: {
+            id: 'teaLatte',
+            name: 'ティーラテ',
+            englishName: 'Tea Latte',
+            category: 'ラテメニュー',
+            difficulty: 2,
+            price: 500,
+            volume: '約240mL（HOT/ICE）',
+            duration: '約3分',
+            ingredients: [
+                'バニラシロップ 30cc',
+                'ティーパック 1個',
+                'お湯（カップ半分程度）',
+                '牛乳 150ml'
+            ],
+            equipment: [
+                '電子レンジ',
+                'ミルクフォーマー',
+                'カップ'
+            ],
+            allergens: ['乳'],
+            warnings: [],
+            steps: [
+                { number: 1, title: 'シロップを入れる', description: 'バニラシロップ30ccをカップに入れる。' },
+                { number: 2, title: 'ティーパックを入れる', description: 'ティーパックを入れてタグをカップの縁に挿す。' },
+                { number: 3, title: 'お湯を入れる', description: 'カップの半分くらいまでお湯を入れる。' },
+                { number: 4, title: 'ミルクを温める', description: '牛乳150mlをレンジで温める。', tips: ['スタートだけ押す'] },
+                { number: 5, title: 'ミルクをスチーム', description: '温めたミルクをフォーマーでスチームする。', tips: ['泡がきめ細かくなるまで、20秒程'] },
+                { number: 6, title: '仕上げ', description: 'カップの縁いっぱいにミルクを注いで完成。' }
+            ],
+            troubleshooting: [],
+            qualityStandards: ['メニューにないけど一番おいしいかも！試してみてね'],
+            variations: [],
+            cleaning: [],
+            references: []
         },
     },
     cleaning: {
@@ -1097,24 +1146,24 @@ const initialData = {
             ]
         },
         hours: {
-            title: '営業時間',
+            title: '営業時間（1月）',
             normal: {
-                label: '通常営業時間（週合計32h）※ラストオーダー19:40',
+                label: '午前/午後の営業',
                 rows: [
-                    { day: '月', time: '15:00〜20:00', hours: '5h' },
-                    { day: '火', time: '11:30〜20:00', hours: '8.5h' },
-                    { day: '水', time: '15:00〜20:00', hours: '5h' },
-                    { day: '木', time: '15:00〜20:00', hours: '5h' },
-                    { day: '金', time: '11:30〜20:00', hours: '8.5h' }
+                    { day: '月', time: '午前✕ / 午後○', hours: '10:00-12:30 / 15:00-17:00' },
+                    { day: '火', time: '午前○ / 午後○', hours: '10:00-12:30 / 15:00-17:00' },
+                    { day: '水', time: '午前✕ / 午後○', hours: '10:00-12:30 / 15:00-17:00' },
+                    { day: '木', time: '午前✕ / 午後○', hours: '10:00-12:30 / 15:00-17:00' },
+                    { day: '金', time: '午前○ / 午後○', hours: '10:00-12:30 / 15:00-17:00' }
                 ],
-                image: 'images/002.png'
+                image: null
             },
             holiday: {
                 label: '長期休暇営業時間（週合計20h）※ラストオーダー19:40',
                 rows: [
                     { day: '月〜金', time: '11:00〜15:00', hours: '4h/日' }
                 ],
-                image: 'images/003.png'
+                image: null
             }
         },
         staffing: {

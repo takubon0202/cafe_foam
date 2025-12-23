@@ -88,6 +88,7 @@
         .mt-0 { margin-top: 0; }
         .small { font-size: 0.92rem; color: var(--text-secondary); }
         @media print {
+            @page { size: A4; margin: 12mm; }
             body { margin: 10mm; }
             .page-break { page-break-after: always; }
         }
@@ -115,6 +116,7 @@
         renderHygiene(root);
         renderService(root);
         renderAirpay(root);
+        renderHealthCheck(root);
         if (typeof mermaid !== 'undefined') {
             setTimeout(() => mermaid.init(undefined, document.querySelectorAll('.mermaid')), 0);
         }
@@ -336,6 +338,65 @@
             wrap.appendChild(card);
         });
         renderSection(root, '衛生マニュアル（印刷用）', wrap, { pageBreak: true });
+    }
+
+    function renderHealthCheck(root) {
+        const data = initialData.hygiene.healthCheck;
+        if (!data) return;
+
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `<h3>${data.title}</h3>`;
+        if (data.subtitle) {
+            const p = document.createElement('p');
+            p.className = 'small';
+            p.textContent = data.subtitle;
+            card.appendChild(p);
+        }
+        if (data.form?.fields) {
+            const div = document.createElement('div');
+            div.innerHTML = '<h4>基本項目</h4>';
+            const ul = document.createElement('ul');
+            data.form.fields.forEach(f => {
+                const li = document.createElement('li');
+                li.textContent = f;
+                ul.appendChild(li);
+            });
+            div.appendChild(ul);
+            card.appendChild(div);
+        }
+        if (data.form?.sections) {
+            data.form.sections.forEach(sec => {
+                const div = document.createElement('div');
+                div.innerHTML = `<h4>${sec.title}</h4>`;
+                if (sec.items) {
+                    const ul = document.createElement('ul');
+                    sec.items.forEach(it => {
+                        const li = document.createElement('li');
+                        li.textContent = it;
+                        ul.appendChild(li);
+                    });
+                    div.appendChild(ul);
+                }
+                card.appendChild(div);
+            });
+        }
+        if (data.form?.submission) {
+            const div = document.createElement('div');
+            div.innerHTML = '<h4>提出・運用</h4>';
+            const ul = document.createElement('ul');
+            data.form.submission.forEach(it => {
+                const li = document.createElement('li');
+                li.textContent = it;
+                ul.appendChild(li);
+            });
+            div.appendChild(ul);
+            card.appendChild(div);
+        }
+
+        const wrap = document.createElement('div');
+        wrap.appendChild(card);
+        renderSection(root, '健康チェック表（印刷用）', wrap, { pageBreak: true });
     }
 
     function renderService(root) {
