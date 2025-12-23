@@ -3562,3 +3562,272 @@ button:focus-visible {
 .toast.error {
     background: var(--color-danger);
 }
+
+/* ===================================
+   NG行動カード（接客の注意ページ）
+   =================================== */
+.ng-behavior-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: calc(var(--spacing-unit) * 3);
+    margin-top: calc(var(--spacing-unit) * 2);
+}
+
+@media (min-width: 1200px) {
+    .ng-behavior-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .ng-behavior-grid {
+        grid-template-columns: 1fr;
+        gap: calc(var(--spacing-unit) * 2);
+    }
+}
+
+.ng-behavior-card {
+    background: var(--bg-card);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 2px solid var(--color-terracotta);
+    transition: all var(--transition-normal);
+    position: relative;
+}
+
+.ng-behavior-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-terracotta), var(--color-danger));
+}
+
+.ng-behavior-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--color-danger);
+}
+
+.ng-behavior-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--bg-secondary);
+    position: relative;
+}
+
+.ng-behavior-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+}
+
+.ng-behavior-card:hover .ng-behavior-image img {
+    transform: scale(1.05);
+}
+
+.ng-behavior-content {
+    padding: calc(var(--spacing-unit) * 2);
+    position: relative;
+}
+
+.ng-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--color-terracotta), var(--color-danger));
+    color: var(--text-light);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--border-radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 4px rgba(198, 123, 92, 0.3);
+}
+
+.ng-behavior-content p {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* 印刷時のNG行動カードスタイル */
+@media print {
+    .ng-behavior-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .ng-behavior-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid var(--color-terracotta);
+    }
+
+    .ng-behavior-card::before {
+        display: none;
+    }
+
+    .ng-behavior-image {
+        aspect-ratio: 16 / 9;
+    }
+
+    .ng-badge {
+        background: var(--color-terracotta);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+/* ===================================
+   接客フローカード（接客方法ページ）
+   =================================== */
+.service-flow-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: calc(var(--spacing-unit) * 3);
+    margin-top: calc(var(--spacing-unit) * 2);
+}
+
+@media (min-width: 1200px) {
+    .service-flow-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 900px) and (max-width: 1199px) {
+    .service-flow-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .service-flow-grid {
+        grid-template-columns: 1fr;
+        gap: calc(var(--spacing-unit) * 2);
+    }
+}
+
+.service-flow-card {
+    background: var(--bg-card);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 2px solid var(--color-latte);
+    transition: all var(--transition-normal);
+    position: relative;
+}
+
+.service-flow-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-matcha), var(--color-latte));
+}
+
+.service-flow-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--color-matcha);
+}
+
+.service-flow-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--bg-secondary);
+    position: relative;
+}
+
+.service-flow-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+}
+
+.service-flow-card:hover .service-flow-image img {
+    transform: scale(1.05);
+}
+
+.service-flow-content {
+    padding: calc(var(--spacing-unit) * 2.5);
+    position: relative;
+}
+
+.step-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--color-matcha), var(--color-moss));
+    color: var(--text-light);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--border-radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 2px 4px rgba(123, 153, 113, 0.3);
+}
+
+.flow-title {
+    color: var(--color-espresso);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem 0;
+    font-family: 'Shippori Mincho', serif;
+    line-height: 1.4;
+}
+
+.flow-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* 旧形式の場合のスタイル */
+.service-flow-card.legacy {
+    border-color: var(--border-color);
+}
+
+.service-flow-card.legacy::before {
+    background: var(--color-latte);
+}
+
+/* 印刷時の接客フローカードスタイル */
+@media print {
+    .service-flow-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .service-flow-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid var(--color-latte);
+    }
+
+    .service-flow-card::before {
+        display: none;
+    }
+
+    .service-flow-image {
+        aspect-ratio: 16 / 9;
+    }
+
+    .step-badge {
+        background: var(--color-matcha);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}

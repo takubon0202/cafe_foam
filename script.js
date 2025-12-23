@@ -1167,13 +1167,32 @@ function renderCustomerServicePage() {
     const cs = serviceData.customerService;
     let html = '';
 
+    // 接客フローを画像カードで表示
     if (cs.flow && cs.flow.length) {
         html += '<div class="service-section">';
-        html += '<h3><i class="fas fa-route"></i> 接客フロー（基本）</h3><ol>';
+        html += '<h3><i class="fas fa-route"></i> 接客フロー（基本）</h3>';
+        html += '<div class="service-flow-grid">';
         cs.flow.forEach(item => {
-            html += `<li>${item}</li>`;
+            // オブジェクト形式か文字列形式かを判定
+            if (typeof item === 'object' && item.image) {
+                html += `
+                    <div class="service-flow-card" data-id="${item.id}">
+                        <div class="service-flow-image">
+                            <img src="${item.image}" alt="${item.alt}" loading="lazy" onerror="this.style.display='none'">
+                        </div>
+                        <div class="service-flow-content">
+                            <span class="step-badge">STEP ${item.step}</span>
+                            <h4 class="flow-title">${item.title}</h4>
+                            <p class="flow-description">${item.description}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // 旧形式（文字列）の場合はリストで表示
+                html += `<div class="service-flow-card legacy"><div class="service-flow-content"><p>${item}</p></div></div>`;
+            }
         });
-        html += '</ol></div>';
+        html += '</div></div>';
     }
 
     if (cs.basics && cs.basics.length) {
@@ -1196,8 +1215,35 @@ function renderCustomerCautionsPage() {
     const cautions = serviceData.customerService.cautions || {};
     let html = '';
 
+    // NG行動は画像付きカードで表示
+    if (cautions.ng && cautions.ng.length) {
+        html += '<div class="service-section">';
+        html += '<h3><i class="fas fa-ban"></i> 接客時のNG行動</h3>';
+        html += '<div class="ng-behavior-grid">';
+        cautions.ng.forEach(item => {
+            // オブジェクト形式か文字列形式かを判定
+            if (typeof item === 'object' && item.image) {
+                html += `
+                    <div class="ng-behavior-card" data-id="${item.id}">
+                        <div class="ng-behavior-image">
+                            <img src="${item.image}" alt="${item.alt}" loading="lazy" onerror="this.style.display='none'">
+                        </div>
+                        <div class="ng-behavior-content">
+                            <span class="ng-badge">NG</span>
+                            <p>${item.text}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // 旧形式（文字列）の場合はリストで表示
+                html += `<div class="ng-behavior-card"><div class="ng-behavior-content"><span class="ng-badge">NG</span><p>${item}</p></div></div>`;
+            }
+        });
+        html += '</div></div>';
+    }
+
+    // 他のカテゴリはリスト形式で表示
     const blocks = [
-        ['接客時のNG行動', cautions.ng, 'fa-ban'],
         ['衛生・身だしなみの注意', cautions.hygiene, 'fa-hand-sparkles'],
         ['オーダー・提供時の注意', cautions.order, 'fa-clipboard-check'],
         ['クレーム・トラブル対応の注意', cautions.claim, 'fa-exclamation-triangle'],
