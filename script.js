@@ -1174,11 +1174,15 @@ function renderCustomerServicePage() {
         html += '<div class="service-flow-grid">';
         cs.flow.forEach(item => {
             // オブジェクト形式か文字列形式かを判定
-            if (typeof item === 'object' && item.image) {
+            if (typeof item === 'object' && item.title) {
                 html += `
-                    <div class="service-flow-card" data-id="${item.id}">
+                    <div class="service-flow-card" data-id="${item.id || ''}">
                         <div class="service-flow-image">
-                            <img src="${item.image}" alt="${item.alt}" loading="lazy" onerror="this.style.display='none'">
+                            ${item.image ? `<img src="${item.image}" alt="${item.alt || item.title}" loading="lazy" onerror="this.parentElement.classList.add('image-error')">` : ''}
+                            <div class="image-placeholder">
+                                <i class="fas fa-image"></i>
+                                <span>STEP ${item.step}</span>
+                            </div>
                         </div>
                         <div class="service-flow-content">
                             <span class="step-badge">STEP ${item.step}</span>
@@ -1187,7 +1191,7 @@ function renderCustomerServicePage() {
                         </div>
                     </div>
                 `;
-            } else {
+            } else if (typeof item === 'string') {
                 // 旧形式（文字列）の場合はリストで表示
                 html += `<div class="service-flow-card legacy"><div class="service-flow-content"><p>${item}</p></div></div>`;
             }
@@ -1222,11 +1226,15 @@ function renderCustomerCautionsPage() {
         html += '<div class="ng-behavior-grid">';
         cautions.ng.forEach(item => {
             // オブジェクト形式か文字列形式かを判定
-            if (typeof item === 'object' && item.image) {
+            if (typeof item === 'object' && item.text) {
                 html += `
-                    <div class="ng-behavior-card" data-id="${item.id}">
+                    <div class="ng-behavior-card" data-id="${item.id || ''}">
                         <div class="ng-behavior-image">
-                            <img src="${item.image}" alt="${item.alt}" loading="lazy" onerror="this.style.display='none'">
+                            ${item.image ? `<img src="${item.image}" alt="${item.alt || item.text}" loading="lazy" onerror="this.parentElement.classList.add('image-error')">` : ''}
+                            <div class="image-placeholder ng-placeholder">
+                                <i class="fas fa-ban"></i>
+                                <span>NG</span>
+                            </div>
                         </div>
                         <div class="ng-behavior-content">
                             <span class="ng-badge">NG</span>
@@ -1234,7 +1242,7 @@ function renderCustomerCautionsPage() {
                         </div>
                     </div>
                 `;
-            } else {
+            } else if (typeof item === 'string') {
                 // 旧形式（文字列）の場合はリストで表示
                 html += `<div class="ng-behavior-card"><div class="ng-behavior-content"><span class="ng-badge">NG</span><p>${item}</p></div></div>`;
             }

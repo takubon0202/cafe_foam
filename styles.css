@@ -3625,10 +3625,60 @@ button:focus-visible {
     height: 100%;
     object-fit: cover;
     transition: transform var(--transition-normal);
+    position: relative;
+    z-index: 2;
 }
 
 .ng-behavior-card:hover .ng-behavior-image img {
     transform: scale(1.05);
+}
+
+/* 画像プレースホルダー（共通） */
+.image-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--color-cream) 100%);
+    color: var(--text-muted);
+    z-index: 1;
+}
+
+.image-placeholder i {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.5;
+}
+
+.image-placeholder span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+/* NGプレースホルダー専用スタイル */
+.ng-placeholder {
+    background: linear-gradient(135deg, #fce8e4 0%, #f5d5cf 100%);
+}
+
+.ng-placeholder i {
+    color: var(--color-terracotta);
+}
+
+/* 画像読み込みエラー時 - プレースホルダーを表示 */
+.ng-behavior-image.image-error img,
+.service-flow-image.image-error img {
+    display: none;
+}
+
+.ng-behavior-image.image-error .image-placeholder,
+.service-flow-image.image-error .image-placeholder {
+    z-index: 3;
 }
 
 .ng-behavior-content {
@@ -3754,10 +3804,21 @@ button:focus-visible {
     height: 100%;
     object-fit: cover;
     transition: transform var(--transition-normal);
+    position: relative;
+    z-index: 2;
 }
 
 .service-flow-card:hover .service-flow-image img {
     transform: scale(1.05);
+}
+
+/* 接客フロープレースホルダー専用スタイル */
+.service-flow-image .image-placeholder {
+    background: linear-gradient(135deg, #e8f5e3 0%, #d4e8cf 100%);
+}
+
+.service-flow-image .image-placeholder i {
+    color: var(--color-matcha);
 }
 
 .service-flow-content {
