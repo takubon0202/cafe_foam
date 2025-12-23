@@ -49,6 +49,17 @@ function initializeNavigation() {
 // ===================================
 
 function loadData() {
+    // データバージョンチェック（バージョンが変わったらキャッシュをクリア）
+    const savedVersion = localStorage.getItem('DATA_VERSION');
+    if (savedVersion !== DATA_VERSION) {
+        // バージョンが異なる場合、古いデータをクリアして最新を使用
+        localStorage.removeItem(STORAGE_KEYS.MENU_DATA);
+        localStorage.removeItem(STORAGE_KEYS.SERVICE_DATA);
+        localStorage.removeItem(STORAGE_KEYS.CLEANING_DATA);
+        localStorage.setItem('DATA_VERSION', DATA_VERSION);
+        console.log('データバージョン更新: ' + DATA_VERSION);
+    }
+
     // メニューデータの読み込み
     const savedMenuData = localStorage.getItem(STORAGE_KEYS.MENU_DATA);
     if (savedMenuData) {
