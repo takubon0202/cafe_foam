@@ -27,14 +27,8 @@ function initializeApp() {
     // ナビゲーションの初期化（モバイルでは非表示）
     initializeNavigation();
 
-    // 初期ページの表示
-    showPage('dashboard');
-
     // ダッシュボードの更新
     updateDashboard();
-
-    // カレンダーの初期化
-    renderCalendar();
 
     // 設定ページのカレンダー設定を読み込む
     loadCalendarSettings();
@@ -125,8 +119,6 @@ function loadData() {
     // メニューページをレンダリング
     renderMenuPages();
 
-    // 清掃ページは統合済み（衛生ページ内で表示）
-
     // 提供方法ページをレンダリング
     renderServicePage();
     renderCustomerServicePage();
@@ -179,13 +171,8 @@ function setupEventListeners() {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const page = e.currentTarget.dataset.page;
-            navigateToPage(page);
-
-            // メニューを閉じる
-            const mainNav = document.getElementById('mainNav');
-            const navOverlay = document.getElementById('navOverlay');
-            mainNav.classList.remove('open');
-            navOverlay.classList.remove('active');
+            showPage(page);
+            closeMenu();
         });
     });
 
@@ -193,7 +180,7 @@ function setupEventListeners() {
     document.querySelectorAll('.menu-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const page = e.currentTarget.dataset.page;
-            navigateToPage(page);
+            showPage(page);
         });
     });
 
@@ -202,25 +189,37 @@ function setupEventListeners() {
     const mainNav = document.getElementById('mainNav');
     const navOverlay = document.getElementById('navOverlay');
 
-    menuToggle.addEventListener('click', () => {
+    // メニュー開閉関数
+    function toggleMenu() {
+        const isOpening = !mainNav.classList.contains('open');
+
+        menuToggle.classList.toggle('active');
         mainNav.classList.toggle('open');
         navOverlay.classList.toggle('active');
-    });
+
+        // アクセシビリティ対応
+        menuToggle.setAttribute('aria-expanded', isOpening);
+        menuToggle.setAttribute('aria-label', isOpening ? 'メニューを閉じる' : 'メニューを開く');
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
 
     // オーバーレイクリックで閉じる
-    navOverlay.addEventListener('click', () => {
-        mainNav.classList.remove('open');
-        navOverlay.classList.remove('active');
+    navOverlay.addEventListener('click', closeMenu);
+
+    // ESCキーで閉じる
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mainNav.classList.contains('open')) {
+            closeMenu();
+        }
     });
 
     // ヘッダータイトルクリックでホームに戻る
     const headerTitle = document.getElementById('headerTitle');
     if (headerTitle) {
         headerTitle.addEventListener('click', () => {
-            navigateToPage('dashboard');
-            // メニューを閉じる
-            mainNav.classList.remove('open');
-            navOverlay.classList.remove('active');
+            showPage('dashboard');
+            closeMenu();
         });
     }
 
@@ -247,11 +246,28 @@ function setupEventListeners() {
 
     // 編集モード
     const editModeToggle = document.getElementById('editMode');
-    editModeToggle.checked = settings.editMode;
-    editModeToggle.addEventListener('change', (e) => {
-        settings.editMode = e.target.checked;
-        saveData();
-    });
+    if (editModeToggle) {
+        editModeToggle.checked = settings.editMode;
+        editModeToggle.addEventListener('change', (e) => {
+            settings.editMode = e.target.checked;
+            saveData();
+        });
+    }
+}
+
+// メニュー閉じる関数（グローバル）
+function closeMenu() {
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+    const navOverlay = document.getElementById('navOverlay');
+
+    if (menuToggle) menuToggle.classList.remove('active');
+    if (mainNav) mainNav.classList.remove('open');
+    if (navOverlay) navOverlay.classList.remove('active');
+    if (menuToggle) {
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'メニューを開く');
+    }
 }
 
 // ===================================
@@ -264,8 +280,17 @@ function toggleNavCategory(header) {
     category.classList.toggle('collapsed');
 }
 
-function navigateToPage(pageId) {
-    showPage(pageId);
+function showPage(pageId) {
+    // すべてのページを非表示
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+
+    // 指定されたページを表示
+    const targetPage = document.getElementById(pageId);
+    if (targetPage) {
+        targetPage.classList.add('active');
+    }
 
     // ナビゲーションのアクティブ状態を更新
     document.querySelectorAll('.nav-link').forEach(link => {
@@ -275,29 +300,18 @@ function navigateToPage(pageId) {
         }
     });
 
-    // モバイルメニューを閉じる
-    document.getElementById('mainNav').classList.remove('open');
-    document.getElementById('navOverlay').classList.remove('active');
-
-    // ページに応じた処理
-    if (pageId === 'dashboard') {
-        updateDashboard();
-    }
+    // ページトップにスクロール
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // メニュー一覧ページを表示
 function showMenuList() {
-    navigateToPage('menu-list');
+    showPage('menu-list');
 }
 
-function showPage(pageId) {
-    document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-    });
-    const targetPage = document.getElementById(pageId);
-    if (targetPage) {
-        targetPage.classList.add('active');
-    }
+// 後方互換性のためのnavigateToPage関数
+function navigateToPage(pageId) {
+    showPage(pageId);
 }
 
 // ===================================
@@ -305,12 +319,15 @@ function showPage(pageId) {
 // ===================================
 
 function updateDashboard() {
-    const dailyTasks = cleaningData.daily.tasks || [];
+    const dailyTasks = cleaningData.daily?.tasks || [];
     const completedTasks = dailyTasks.filter(task => task.completed).length;
     const totalTasks = dailyTasks.length;
 
-    document.getElementById('completedCount').textContent = completedTasks;
-    document.getElementById('totalCount').textContent = totalTasks;
+    const completedCountEl = document.getElementById('completedCount');
+    const totalCountEl = document.getElementById('totalCount');
+
+    if (completedCountEl) completedCountEl.textContent = completedTasks;
+    if (totalCountEl) totalCountEl.textContent = totalTasks;
 }
 
 // ===================================
@@ -477,83 +494,6 @@ function renderStep(step) {
 }
 
 // ===================================
-// 清掃ページのレンダリング
-// ===================================
-
-function renderCleaningPages() {
-    ['daily', 'weekly', 'monthly'].forEach(period => {
-        const container = document.getElementById(`${period}Tasks`);
-        if (!container) return;
-
-        const data = cleaningData[period];
-        if (!data || !data.tasks) return;
-
-        let html = '';
-        data.tasks.forEach(task => {
-            html += renderCleaningTask(task, period);
-        });
-
-        container.innerHTML = html;
-
-        // チェックボックスイベントを追加
-        container.querySelectorAll('.task-checkbox input').forEach(checkbox => {
-            checkbox.addEventListener('change', (e) => {
-                const taskId = e.target.dataset.taskId;
-                const period = e.target.dataset.period;
-                toggleTaskCompletion(taskId, period);
-            });
-        });
-
-        // 画像クリックイベントを追加
-        container.querySelectorAll('.task-image').forEach(img => {
-            img.addEventListener('click', () => {
-                showImageModal(img.src, img.alt);
-            });
-        });
-    });
-}
-
-function renderCleaningTask(task, period) {
-    let html = `<div class="cleaning-task ${task.completed ? 'completed' : ''}">`;
-    html += '<div class="task-checkbox">';
-    html += `<input type="checkbox" ${task.completed ? 'checked' : ''} data-task-id="${task.id}" data-period="${period}">`;
-    html += '</div>';
-    html += '<div class="task-content">';
-    html += `<div class="task-title">${task.title}</div>`;
-    html += `<div class="task-description">${task.description}</div>`;
-
-    // 画像がある場合は表示（新しい形式）
-    if (task.images && task.images.length > 0) {
-        html += '<div class="task-images">';
-        task.images.forEach(image => {
-            html += `<img src="${image.path}" class="task-image" alt="${image.alt}" onerror="this.style.display='none'">`;
-        });
-        html += '</div>';
-    }
-
-    if (task.completed && task.completedAt) {
-        const date = new Date(task.completedAt);
-        html += `<div class="task-completion">✓ 完了: ${date.toLocaleString('ja-JP')}</div>`;
-    }
-
-    html += '</div>';
-    html += '</div>';
-    return html;
-}
-
-function toggleTaskCompletion(taskId, period) {
-    const task = cleaningData[period].tasks.find(t => t.id === taskId);
-    if (!task) return;
-
-    task.completed = !task.completed;
-    task.completedAt = task.completed ? new Date().toISOString() : null;
-
-    saveData();
-    renderCleaningPages();
-    updateDashboard();
-}
-
-// ===================================
 // タブ切り替え
 // ===================================
 
@@ -570,7 +510,10 @@ function switchTab(tabName) {
     document.querySelectorAll('.tab-pane').forEach(pane => {
         pane.classList.remove('active');
     });
-    document.getElementById(`${tabName}-tab`).classList.add('active');
+    const targetPane = document.getElementById(`${tabName}-tab`);
+    if (targetPane) {
+        targetPane.classList.add('active');
+    }
 }
 
 // ===================================
@@ -844,9 +787,6 @@ function saveCalendarSettings() {
         // 更新履歴に記録
         addUpdateHistory('カレンダーの設定を更新しました');
 
-        // カレンダーを再描画
-        renderCalendar();
-
         // 3秒後にメッセージを消す
         setTimeout(() => {
             statusDiv.innerHTML = '';
@@ -880,9 +820,6 @@ function clearCalendarSettings() {
         // 更新履歴に記録
         addUpdateHistory('カレンダーの設定を削除しました');
 
-        // カレンダーを再描画（空にする）
-        renderCalendar();
-
         // 3秒後にメッセージを消す
         setTimeout(() => {
             statusDiv.innerHTML = '';
@@ -905,55 +842,6 @@ function loadCalendarSettings() {
     }
 }
 
-/**
- * カレンダーを埋め込んで表示
- */
-function renderCalendar() {
-    const calendarContainer = document.getElementById('cleaningCalendar');
-    if (!calendarContainer) return;
-
-    const embedCode = localStorage.getItem(STORAGE_KEYS.CALENDAR_EMBED);
-
-    // デフォルトカレンダー（日本の祝日カレンダー + サンプルカレンダー）
-    const defaultCalendarSrc = 'https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTokyo&showNav=1&showTitle=0&showPrint=0&showCalendars=0&mode=MONTH&hl=ja&src=amEuamFwYW5lc2UjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%230B8043';
-
-    if (embedCode) {
-        // ユーザーが設定したカレンダーがある場合
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(embedCode, 'text/html');
-        const iframe = doc.querySelector('iframe');
-
-        if (iframe) {
-            // レスポンシブ対応のためにスタイルを調整
-            iframe.style.width = '100%';
-            iframe.style.height = '600px';
-            iframe.style.border = '0';
-
-            calendarContainer.innerHTML = '';
-            calendarContainer.appendChild(iframe);
-        } else {
-            calendarContainer.innerHTML = `
-                <p style="text-align: center; color: #f44336; padding: 2rem;">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    カレンダーの埋め込みコードが正しくありません。設定を確認してください。
-                </p>
-            `;
-        }
-    } else {
-        // デフォルトカレンダーを表示（日本の祝日カレンダー）
-        const iframe = document.createElement('iframe');
-        iframe.src = defaultCalendarSrc;
-        iframe.style.border = '0';
-        iframe.style.width = '100%';
-        iframe.style.height = '600px';
-        iframe.style.frameborder = '0';
-        iframe.style.scrolling = 'no';
-
-        calendarContainer.innerHTML = '';
-        calendarContainer.appendChild(iframe);
-    }
-}
-
 // ===================================
 // 提供方法マニュアル
 // ===================================
@@ -963,47 +851,6 @@ function renderServicePage() {
     if (!container || !serviceData) return;
 
     let html = '';
-
-    // 接客方法
-    if (serviceData.customerService) {
-        html += '<div class="service-section">';
-        html += `<h3><i class="fas fa-handshake"></i> ${serviceData.customerService.title}</h3>`;
-
-        if (serviceData.customerService.flow && serviceData.customerService.flow.length) {
-            html += '<h4>接客フロー（基本）</h4><ol>';
-            serviceData.customerService.flow.forEach(item => {
-                html += `<li>${item}</li>`;
-            });
-            html += '</ol>';
-        }
-
-        if (serviceData.customerService.basics && serviceData.customerService.basics.length) {
-            html += '<h4>接客の基本姿勢</h4><ul>';
-            serviceData.customerService.basics.forEach(item => {
-                html += `<li>${item}</li>`;
-            });
-            html += '</ul>';
-        }
-
-        const cautions = serviceData.customerService.cautions || {};
-        const cautionBlocks = [
-            ['接客時のNG行動', cautions.ng],
-            ['衛生・身だしなみの注意', cautions.hygiene],
-            ['オーダー・提供時の注意', cautions.order],
-            ['クレーム・トラブル対応の注意', cautions.claim]
-        ];
-        cautionBlocks.forEach(([title, list]) => {
-            if (list && list.length) {
-                html += `<h4>${title}</h4><ul>`;
-                list.forEach(item => {
-                    html += `<li>${item}</li>`;
-                });
-                html += '</ul>';
-            }
-        });
-
-        html += '</div>';
-    }
 
     // 概要
     if (serviceData.overview) {
@@ -1065,9 +912,6 @@ function renderServicePage() {
         };
         if (serviceData.hours.normal) renderHoursTable(serviceData.hours.normal);
         if (serviceData.hours.holiday) renderHoursTable(serviceData.hours.holiday);
-        if (serviceData.hours.normalImage && !serviceData.hours.normal.image) {
-            html += `<div class="service-figure"><img src="${serviceData.hours.normalImage}" alt="通常営業時間" class="responsive-img"></div>`;
-        }
         html += '</div>';
     }
 
