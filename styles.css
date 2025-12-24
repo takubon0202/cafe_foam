@@ -669,6 +669,11 @@ main {
     display: block;
 }
 
+.page > h2:first-child {
+    margin-top: calc(var(--spacing-unit) * 3);
+    margin-bottom: calc(var(--spacing-unit) * 3);
+}
+
 @keyframes pageIn {
     from {
         opacity: 0;
@@ -716,7 +721,23 @@ main {
 
 .page-actions {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.75rem;
+}
+
+/* メニュー一覧に戻るボタン */
+.btn-back-to-menu {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-back-to-menu i {
+    transition: transform var(--transition-fast);
+}
+
+.btn-back-to-menu:hover i {
+    transform: translateX(-3px);
 }
 
 /* ===================================
@@ -769,6 +790,46 @@ main {
 .btn-danger:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(198, 123, 92, 0.4);
+}
+
+/* ===================================
+   メニュー一覧アクションボタン
+   =================================== */
+.menu-list-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--spacing-unit) * 1.5);
+    margin-bottom: calc(var(--spacing-unit) * 3);
+    align-items: center;
+}
+
+.btn-manual {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.btn-manual i.fa-file-pdf {
+    color: var(--color-terracotta);
+    font-size: 1.1em;
+    transition: color var(--transition-fast);
+}
+
+.btn-manual:hover i.fa-file-pdf {
+    color: var(--color-caramel);
+}
+
+@media (max-width: 480px) {
+    .menu-list-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .menu-list-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 /* ===================================
