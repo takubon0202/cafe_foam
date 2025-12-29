@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe Foam 運営マニュアル</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=20251223">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: false, theme: 'default' });
+    </script>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header>
+        <div class="container">
+            <h1 id="headerTitle" style="cursor: pointer;">
+                <img src="images/005.png" alt="Cafe Foam ロゴ" class="logo-image">
+                <span class="logo-text">Cafe Foam 運営マニュアル</span>
+            </h1>
+            <button class="menu-toggle" id="menuToggle" aria-label="メニューを開く">
+                <span class="hamburger">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ナビゲーション -->
+    <nav id="mainNav">
+        <ul>
+            <li><a href="#dashboard" class="nav-link active" data-page="dashboard">
+                <i class="fas fa-home"></i> ホーム
+            </a></li>
+
+            <!-- ラテ -->
+            <li class="nav-category">
+                <div class="nav-category-header" onclick="toggleNavCategory(this)">
+                    <i class="fas fa-mug-hot"></i> ラテ
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <ul class="nav-submenu">
+                    <li><a href="#menu-cafeLatte" class="nav-link" data-page="menu-cafeLatte">
+                        <i class="fas fa-mug-hot"></i> カフェラテ
+                    </a></li>
+                    <li><a href="#menu-cafeMocha" class="nav-link" data-page="menu-cafeMocha">
+                        <i class="fas fa-mug-hot"></i> カフェモカ
+                    </a></li>
+                    <li><a href="#menu-caramelMacchiato" class="nav-link" data-page="menu-caramelMacchiato">
+                        <i class="fas fa-mug-hot"></i> キャラメルマキアート
+                    </a></li>
+                    <li><a href="#menu-vanillaLatte" class="nav-link" data-page="menu-vanillaLatte">
+                        <i class="fas fa-mug-hot"></i> バニララテ
+                    </a></li>
+                    <li><a href="#menu-whiteMocha" class="nav-link" data-page="menu-whiteMocha">
+                        <i class="fas fa-mug-hot"></i> ホワイトモカ
+                    </a></li>
+                    <li><a href="#menu-chaiLatte" class="nav-link" data-page="menu-chaiLatte">
+                        <i class="fas fa-mug-hot"></i> チャイラテ
+                    </a></li>
+                    <li><a href="#menu-matchaLatte" class="nav-link" data-page="menu-matchaLatte">
+                        <i class="fas fa-mug-hot"></i> 抹茶ラテ
+                    </a></li>
+                    <li><a href="#menu-hojichaLatte" class="nav-link" data-page="menu-hojichaLatte">
+                        <i class="fas fa-mug-hot"></i> ほうじ茶ラテ
+                    </a></li>
+                </ul>
+            </li>
+
+            <!-- コーヒー・ティー -->
+            <li class="nav-category">
+                <div class="nav-category-header" onclick="toggleNavCategory(this)">
+                    <i class="fas fa-coffee"></i> コーヒー・ティー
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <ul class="nav-submenu">
+                    <li><a href="#menu-coffee" class="nav-link" data-page="menu-coffee">
+                        <i class="fas fa-coffee"></i> コーヒー（HOT / ICE）
+                    </a></li>
+                    <li><a href="#menu-earlGreyTea" class="nav-link" data-page="menu-earlGreyTea">
+                        <i class="fas fa-leaf"></i> アールグレイティー
+                    </a></li>
+                </ul>
+            </li>
+
+            <!-- マニュアル・設定 -->
+            <li><a href="#service" class="nav-link" data-page="service">
+                <i class="fas fa-store"></i> 提供方法
+            </a></li>
+            <li><a href="#airpay" class="nav-link" data-page="airpay">
+                <i class="fas fa-credit-card"></i> 決済・AirPay
+            </a></li>
+            <li><a href="#customer-service" class="nav-link" data-page="customer-service">
+                <i class="fas fa-handshake"></i> 接客方法
+            </a></li>
+            <li><a href="#customer-cautions" class="nav-link" data-page="customer-cautions">
+                <i class="fas fa-exclamation-circle"></i> 接客の注意
+            </a></li>
+            <li><a href="#hygiene" class="nav-link" data-page="hygiene">
+                <i class="fas fa-hand-sparkles"></i> 衛生・清掃マニュアル
+            </a></li>
+            <li><a href="#inventory" class="nav-link" data-page="inventory">
+                <i class="fas fa-boxes"></i> 在庫管理
+            </a></li>
+            <li><a href="#troubleshooting" class="nav-link" data-page="troubleshooting">
+                <i class="fas fa-wrench"></i> トラブルシューティング
+            </a></li>
+            <li><a href="#settings" class="nav-link" data-page="settings">
+                <i class="fas fa-cog"></i> 設定
+            </a></li>
+        </ul>
+    </nav>
+
+    <!-- ナビゲーションオーバーレイ（モバイル用） -->
+    <div id="navOverlay" class="nav-overlay"></div>
+
+    <!-- メインコンテンツ -->
+    <main class="container">
+        <!-- ダッシュボード -->
+        <section id="dashboard" class="page active">
+            <div class="dashboard-branding">Cafe Foam 運営マニュアル</div>
+            <p>必要な情報を選択してください</p>
+
+            <div class="dashboard-main-menu two-col">
+                <!-- メニュー一覧カード -->
+                <div class="main-menu-card" onclick="showMenuList()">
+                    <div class="main-menu-icon">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3>メニュー一覧</h3>
+                    <p>全メニューの作り方を確認</p>
+                </div>
+
+                <!-- 衛生・清掃マニュアルカード -->
+                <div class="main-menu-card" onclick="showPage('hygiene')">
+                    <div class="main-menu-icon">
+                        <i class="fas fa-hand-sparkles"></i>
+                    </div>
+                    <h3>衛生・清掃マニュアル</h3>
+                    <p>衛生管理と清掃手順</p>
+                </div>
+
+                <!-- 提供方法カード -->
+                <div class="main-menu-card" onclick="showPage('service')">
+                    <div class="main-menu-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>提供方法</h3>
+                    <p>オペレーションと接客フロー</p>
+                </div>
+
+                <!-- 決済・AirPayカード -->
+                <div class="main-menu-card" onclick="showPage('airpay')">
+                    <div class="main-menu-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3>決済・AirPay</h3>
+                    <p>キャッシュレス対応と動画マニュアル</p>
+                </div>
+
+                <!-- 接客方法カード -->
+                <div class="main-menu-card" onclick="showPage('customer-service')">
+                    <div class="main-menu-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>接客方法</h3>
+                    <p>接客フローと基本姿勢</p>
+                </div>
+
+                <!-- 接客の注意カード -->
+                <div class="main-menu-card" onclick="showPage('customer-cautions')">
+                    <div class="main-menu-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <h3>接客の注意</h3>
+                    <p>NG行動・衛生・クレーム対応</p>
+                </div>
+
+                <!-- 在庫管理カード -->
+                <div class="main-menu-card" onclick="showPage('inventory')">
+                    <div class="main-menu-icon">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <h3>在庫管理</h3>
+                    <p>材料・備品の在庫状況を確認</p>
+                </div>
+            </div>
+
+            <!-- 今日の清掃チェックリスト -->
+            <div class="dashboard-checklist">
+                <div class="section-card">
+                    <h3><i class="fas fa-check-square"></i> 今日の清掃チェックリスト</h3>
+                    <div id="todayChecklist">
+                        <div class="checklist-summary">
+                            <p>完了: <span id="completedCount">0</span> / <span id="totalCount">0</span></p>
+                        </div>
+                        <button class="btn btn-secondary" onclick="showPage('hygiene')">
+                            衛生・清掃マニュアルへ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- メニュー一覧ページ -->
+        <section id="menu-list" class="page">
+            <h2><i class="fas fa-coffee"></i> メニュー一覧</h2>
+            <div class="menu-list-actions">
+                <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                    <i class="fas fa-arrow-left"></i> ホームに戻る
+                </button>
+                <a href="docs/ECAM22020_manual.pdf" target="_blank" rel="noopener" class="btn btn-secondary btn-manual" aria-label="コーヒーメーカー取扱説明書を開く">
+                    <i class="fas fa-file-pdf"></i> マシン取扱説明書
+                </a>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="section-card">
+                    <h3><i class="fas fa-mug-hot"></i> ラテ</h3>
+                    <div class="menu-buttons">
+                        <button class="menu-btn" data-page="menu-cafeLatte">
+                            <i class="fas fa-mug-hot"></i>
+                            <span>カフェラテ</span>
+                            <small>HOT / ICE</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-cafeMocha">
+                            <i class="fas fa-mug-hot"></i>
+                            <span>カフェモカ</span>
+                            <small>HOT / ICE</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-caramelMacchiato">
+                            <i class="fas fa-mug-hot"></i>
+                            <span>キャラメルマキアート</span>
+                            <small>HOT / ICE</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-vanillaLatte">
+                            <i class="fas fa-mug-hot"></i>
+                            <span>バニララテ</span>
+                            <small>HOT / ICE</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-whiteMocha">
+                            <i class="fas fa-mug-hot"></i>
+                            <span>ホワイトモカ</span>
+                            <small>HOT / ICE</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-chaiLatte">
+                            <i class="fas fa-mug-hot"></i>
+                            <span>チャイラテ</span>
+                            <small>HOT / ICE</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-matchaLatte">
+                            <i class="fas fa-mug-hot"></i>
+                            <span>抹茶ラテ</span>
+                            <small>HOT / ICE</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-hojichaLatte">
+                            <i class="fas fa-mug-hot"></i>
+                            <span>ほうじ茶ラテ</span>
+                            <small>HOT / ICE</small>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h3><i class="fas fa-coffee"></i> コーヒー・ティー</h3>
+                    <div class="menu-buttons">
+                        <button class="menu-btn" data-page="menu-coffee">
+                            <i class="fas fa-coffee"></i>
+                            <span>コーヒー（HOT / ICE）</span>
+                            <small>ドリップ</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-earlGreyTea">
+                            <i class="fas fa-leaf"></i>
+                            <span>アールグレイティー</span>
+                            <small>HOT / ICE</small>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- カフェラテ -->
+        <section id="menu-cafeLatte" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-mug-hot"></i> カフェラテ</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary btn-back-to-menu" onclick="showPage('menu-list')">
+                        <i class="fas fa-arrow-left"></i> メニュー一覧
+                    </button>
+                    <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                        <i class="fas fa-home"></i> ホーム
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">400円</p></div>
+                <div class="info-card"><h4>容量</h4><p>約240mL（HOT/ICE）</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
+            </div>
+            <div class="menu-content" id="cafeLatteContent"></div>
+        </section>
+
+        <!-- カフェモカ -->
+        <section id="menu-cafeMocha" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-mug-hot"></i> カフェモカ</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary btn-back-to-menu" onclick="showPage('menu-list')">
+                        <i class="fas fa-arrow-left"></i> メニュー一覧
+                    </button>
+                    <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                        <i class="fas fa-home"></i> ホーム
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">400円</p></div>
+                <div class="info-card"><h4>容量</h4><p>約240mL（HOT/ICE）</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
+            </div>
+            <div class="menu-content" id="cafeMochaContent"></div>
+        </section>
+
+        <!-- キャラメルマキアート -->
+        <section id="menu-caramelMacchiato" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-mug-hot"></i> キャラメルマキアート</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary btn-back-to-menu" onclick="showPage('menu-list')">
+                        <i class="fas fa-arrow-left"></i> メニュー一覧
+                    </button>
+                    <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                        <i class="fas fa-home"></i> ホーム
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">400円</p></div>
+                <div class="info-card"><h4>容量</h4><p>約240mL（HOT/ICE）</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
+            </div>
+            <div class="menu-content" id="caramelMacchiatoContent"></div>
+        </section>
+
+        <!-- バニララテ -->
+        <section id="menu-vanillaLatte" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-mug-hot"></i> バニララテ</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary btn-back-to-menu" onclick="showPage('menu-list')">
+                        <i class="fas fa-arrow-left"></i> メニュー一覧
+                    </button>
+                    <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                        <i class="fas fa-home"></i> ホーム
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">400円</p></div>
+                <div class="info-card"><h4>容量</h4><p>約240mL（HOT/ICE）</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
+            </div>
+            <div class="menu-content" id="vanillaLatteContent"></div>
+        </section>
+
+        <!-- ホワイトモカ -->
+        <section id="menu-whiteMocha" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-mug-hot"></i> ホワイトモカ</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary btn-back-to-menu" onclick="showPage('menu-list')">
+                        <i class="fas fa-arrow-left"></i> メニュー一覧
+                    </button>
+                    <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                        <i class="fas fa-home"></i> ホーム
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">400円</p></div>
+                <div class="info-card"><h4>容量</h4><p>約240mL（HOT/ICE）</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
+            </div>
+            <div class="menu-content" id="whiteMochaContent"></div>
+        </section>
+
+        <!-- チャイラテ -->
+        <section id="menu-chaiLatte" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-mug-hot"></i> チャイラテ</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary btn-back-to-menu" onclick="showPage('menu-list')">
+                        <i class="fas fa-arrow-left"></i> メニュー一覧
+                    </button>
+                    <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                        <i class="fas fa-home"></i> ホーム
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">500円</p></div>
+                <div class="info-card"><h4>容量</h4><p>約240mL（HOT/ICE）</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
+            </div>
+            <div class="menu-content" id="chaiLatteContent"></div>
+        </section>
+
+        <!-- 抹茶ラテ -->
+        <section id="menu-matchaLatte" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-mug-hot"></i> 抹茶ラテ</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary btn-back-to-menu" onclick="showPage('menu-list')">
+                        <i class="fas fa-arrow-left"></i> メニュー一覧
+                    </button>
+                    <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                        <i class="fas fa-home"></i> ホーム
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">500円</p></div>
+                <div class="info-card"><h4>容量</h4><p>約240mL（HOT/ICE）</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
+            </div>
+            <div class="menu-content" id="matchaLatteContent"></div>
+        </section>
+
+        <!-- ほうじ茶ラテ -->
+        <section id="menu-hojichaLatte" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-mug-hot"></i> ほうじ茶ラテ</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary btn-back-to-menu" onclick="showPage('menu-list')">
+                        <i class="fas fa-arrow-left"></i> メニュー一覧
+                    </button>
+                    <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                        <i class="fas fa-home"></i> ホーム
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">500円</p></div>
+                <div class="info-card"><h4>容量</h4><p>約240mL（HOT/ICE）</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
+            </div>
+            <div class="menu-content" id="hojichaLatteContent"></div>
+        </section>
+
+        <!-- コーヒー -->
+        <section id="menu-coffee" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-coffee"></i> コーヒー（HOT / ICE）</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary btn-back-to-menu" onclick="showPage('menu-list')">
+                        <i class="fas fa-arrow-left"></i> メニュー一覧
+                    </button>
+                    <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                        <i class="fas fa-home"></i> ホーム
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">300円</p></div>
+                <div class="info-card"><h4>容量</h4><p>約240mL（アイスは氷込み）</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
+            </div>
+            <div class="menu-content" id="coffeeContent"></div>
+        </section>
+
+        <!-- アールグレイティー -->
+        <section id="menu-earlGreyTea" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-leaf"></i> アールグレイティー</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary btn-back-to-menu" onclick="showPage('menu-list')">
+                        <i class="fas fa-arrow-left"></i> メニュー一覧
+                    </button>
+                    <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                        <i class="fas fa-home"></i> ホーム
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">300円</p></div>
+                <div class="info-card"><h4>容量</h4><p>約240mL（HOT/ICE）</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約1分</p></div>
+            </div>
+            <div class="menu-content" id="earlGreyTeaContent"></div>
+        </section>
+
+        <!-- 衛生・清掃マニュアル -->
+        <section id="hygiene" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-hand-sparkles"></i> 衛生・清掃マニュアル</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                        <i class="fas fa-home"></i> ホーム
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="staff">スタッフ用</button>
+                <button class="tab-btn" data-tab="manager">責任者・教育用</button>
+                <button class="tab-btn" data-tab="healthCheck">健康チェック表</button>
+            </div>
+
+            <div class="tab-content">
+                <div id="staff-tab" class="tab-pane active">
+                    <div class="hygiene-section" id="staffHygieneContent"></div>
+                </div>
+                <div id="manager-tab" class="tab-pane">
+                    <div class="hygiene-section" id="managerHygieneContent"></div>
+                </div>
+                <div id="healthCheck-tab" class="tab-pane">
+                    <div class="hygiene-section" id="healthCheckContent"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 提供方法マニュアル -->
+        <section id="service" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-store"></i> 提供方法（オペレーション）</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                        <i class="fas fa-home"></i> ホーム
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="service-content" id="serviceContent"></div>
+        </section>
+
+        <!-- 接客方法 -->
+        <section id="customer-service" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-handshake"></i> 接客方法</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                        <i class="fas fa-home"></i> ホーム
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="service-content" id="customerServiceContent"></div>
+        </section>
+
+        <!-- 接客の注意 -->
+        <section id="customer-cautions" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-exclamation-circle"></i> 接客の注意</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                        <i class="fas fa-home"></i> ホーム
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="service-content" id="customerCautionsContent"></div>
+        </section>
+
+        <!-- AirPayマニュアル -->
+        <section id="airpay" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-credit-card"></i> 決済・AirPayマニュアル</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                        <i class="fas fa-home"></i> ホーム
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="service-content" id="airpayContent"></div>
+        </section>
+
+        <!-- 在庫管理 -->
+        <section id="inventory" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-boxes"></i> 在庫管理</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                        <i class="fas fa-home"></i> ホーム
+                    </button>
+                    <a href="https://docs.google.com/spreadsheets/d/1iuTiIGV0Zz-AMx8aTcKZ0qSfI6kUSnZT4RZnWbgDCB8/edit" target="_blank" rel="noopener" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i> スプレッドシートを開く
+                    </a>
+                    <button class="btn btn-secondary" onclick="refreshInventory()">
+                        <i class="fas fa-sync-alt"></i> 更新
+                    </button>
+                </div>
+            </div>
+
+            <!-- 在庫サマリー -->
+            <div class="inventory-summary" id="inventorySummary">
+                <div class="summary-card">
+                    <div class="summary-icon"><i class="fas fa-cube"></i></div>
+                    <div class="summary-content">
+                        <span class="summary-value" id="totalItemsCount">-</span>
+                        <span class="summary-label">総アイテム数</span>
+                    </div>
+                </div>
+                <div class="summary-card summary-warning">
+                    <div class="summary-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <div class="summary-content">
+                        <span class="summary-value" id="needsOrderCount">-</span>
+                        <span class="summary-label">発注が必要</span>
+                    </div>
+                </div>
+                <div class="summary-card summary-ok">
+                    <div class="summary-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="summary-content">
+                        <span class="summary-value" id="okItemsCount">-</span>
+                        <span class="summary-label">在庫OK</span>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon"><i class="fas fa-clock"></i></div>
+                    <div class="summary-content">
+                        <span class="summary-value" id="lastUpdated">-</span>
+                        <span class="summary-label">最終更新</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 在庫タブ -->
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="inventory-list">在庫一覧</button>
+                <button class="tab-btn" data-tab="storage-info">保管場所</button>
+            </div>
+
+            <div class="tab-content">
+                <div id="inventory-list-tab" class="tab-pane active">
+                    <div class="inventory-content" id="inventoryListContent">
+                        <div class="loading-spinner">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>在庫データを読み込み中...</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="storage-info-tab" class="tab-pane">
+                    <div class="storage-content" id="storageInfoContent">
+                        <div class="loading-spinner">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>保管場所データを読み込み中...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 読み取り専用の注意 -->
+            <div class="inventory-notice">
+                <i class="fas fa-info-circle"></i>
+                <span>このページは読み取り専用です。在庫の編集はスプレッドシートから行ってください。</span>
+            </div>
+        </section>
+
+        <!-- トラブルシューティング -->
+        <section id="troubleshooting" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-wrench"></i> トラブルシューティング</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                        <i class="fas fa-home"></i> ホーム
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="troubleshooting-section" id="troubleshootingContent"></div>
+        </section>
+
+        <!-- 設定 -->
+        <section id="settings" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-cog"></i> 設定</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                        <i class="fas fa-home"></i> ホーム
+                    </button>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="setting-card">
+                    <h3><i class="fas fa-calendar-alt"></i> カレンダー連携</h3>
+                    <p class="setting-description">清掃履歴を管理するためのカレンダーを埋め込みます。Googleカレンダー、Outlookカレンダーなど、任意のカレンダーサービスの埋め込みコードを使用できます。</p>
+
+                    <div class="calendar-setup-steps">
+                        <h4>設定手順（Googleカレンダーの場合）：</h4>
+                        <ol>
+                            <li>Googleカレンダーで清掃用カレンダーを作成</li>
+                            <li>カレンダーの「設定と共有」を開く</li>
+                            <li>「アクセス権限」で「一般公開して誰でも利用できるようにする」をオン</li>
+                            <li>「カレンダーの統合」セクションの「埋め込みコード」をコピー</li>
+                            <li>下のテキストエリアに貼り付けて保存</li>
+                        </ol>
+                        <p><small>※ 他のカレンダーサービスの場合も、同様に埋め込みコード（iframe）を取得して貼り付けてください</small></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="calendarEmbedCode">カレンダー埋め込みコード（iframe）:</label>
+                        <textarea
+                            id="calendarEmbedCode"
+                            placeholder='<iframe src="https://calendar.google.com/calendar/embed?src=..." style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>'
+                            class="input-field"
+                            rows="6"
+                        ></textarea>
+                    </div>
+
+                    <div class="setting-actions">
+                        <button class="btn btn-primary" onclick="saveCalendarSettings()">
+                            <i class="fas fa-save"></i> 保存
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearCalendarSettings()">
+                            <i class="fas fa-trash"></i> クリア
+                        </button>
+                    </div>
+
+                    <div id="calendarSaveStatus" class="save-status"></div>
+                </div>
+
+                <div class="setting-card">
+                    <h3>データ管理</h3>
+                    <button class="btn btn-primary" onclick="backupData()">
+                        <i class="fas fa-download"></i> データをバックアップ
+                    </button>
+                    <button class="btn btn-secondary" onclick="restoreData()">
+                        <i class="fas fa-upload"></i> データを復元
+                    </button>
+                </div>
+
+                <div class="setting-card">
+                    <h3>マニュアル編集</h3>
+                    <label class="switch">
+                        <input type="checkbox" id="editMode">
+                        <span class="slider"></span>
+                    </label>
+                    <label for="editMode">編集モード</label>
+                </div>
+
+                <div class="setting-card">
+                    <h3>更新履歴</h3>
+                    <div id="updateHistory"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 画像モーダル -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="caption"></div>
+    </div>
+
+    <!-- フッター -->
+    <footer>
+        <p>&copy; 2025 Cafe Foam - デロンギ マグニフィカS 運営マニュアル</p>
+    </footer>
+
+    <script src="data.js?v=20251223"></script>
+    <script src="script.js?v=20251223"></script>
+</body>
+</html>

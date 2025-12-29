@@ -1,0 +1,32 @@
+# APIキーを含むファイル（絶対にコミットしない）
+generate_ng_images.py
+generate_service_images.py
+
+# 一時ファイル
+*.tmp
+*.temp
+*.log
+
+# OS生成ファイル
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# エディタ設定
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Node.js（将来使う場合）
+node_modules/
+
+# 一時的なExcelデータ
+excel_data.json
+read_excel.py
