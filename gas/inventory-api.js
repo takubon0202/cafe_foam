@@ -1,6 +1,12 @@
 /**
- * Cafe Foam 在庫管理 API v2.2
+ * Cafe Foam 在庫管理 API v2.3
  * Google Apps Script (GAS)
+ *
+ * v2.3 変更点:
+ * - 発注判定を「仕入れ状況」列ベースに変更
+ * - 完了（緑）、未申請（赤）、仕入れ申請中（オレンジ）の3段階表示
+ * - statusType フィールドを追加（'completed', 'pending', 'in_progress'）
+ * - inProgressList を追加
  *
  * v2.2 変更点:
  * - 単位推測ロジック（inferUnit）を完全に書き直し
@@ -166,9 +172,27 @@ function doGet(e) {
       const orderLine = parseFloat(row[5]) || 0;
       const purchaseStatus = String(row[1] || '').trim();
 
-      // 発注判定: 残数が仕入れライン以下なら発注が必要
-      const needsOrder = orderLine > 0 && remaining <= orderLine;
-      const status = needsOrder ? '発注' : 'OK';
+      // v2.3: 仕入れ状況ベースの判定
+      // 完了 → OK（緑）
+      // 未申請 → 要発注（赤）
+      // 仕入れ申請中 → 申請中（オレンジ）
+      const needsOrder = purchaseStatus === '未申請';
+      const inProgress = purchaseStatus === '仕入れ申請中';
+      const isCompleted = purchaseStatus === '完了';
+
+      // 表示用ステータス
+      let status = 'OK';
+      let statusType = 'completed'; // completed, pending, in_progress
+      if (needsOrder) {
+        status = '未申請';
+        statusType = 'pending';
+      } else if (inProgress) {
+        status = '申請中';
+        statusType = 'in_progress';
+      } else {
+        status = '完了';
+        statusType = 'completed';
+      }
 
       // 在庫率を計算（理想残数に対する割合）
       const stockRatio = ideal > 0 ? Math.round((remaining / ideal) * 100) : 100;
@@ -188,7 +212,9 @@ function doGet(e) {
         orderLine: orderLine,
         purchaseStatus: purchaseStatus,
         status: status,
-        needsOrder: needsOrder,
+        statusType: statusType,      // 'completed', 'pending', 'in_progress'
+        needsOrder: needsOrder,       // 未申請かどうか
+        inProgress: inProgress,       // 仕入れ申請中かどうか
         stockRatio: stockRatio,
         unit: unit
       });
@@ -211,14 +237,15 @@ function doGet(e) {
     }
 
     // ===== サマリー情報 =====
-    const needsOrderItems = items.filter(item => item.needsOrder);
-    const lowStockItems = items.filter(item => item.stockRatio < 50 && !item.needsOrder);
+    const needsOrderItems = items.filter(item => item.needsOrder);      // 未申請
+    const inProgressItems = items.filter(item => item.inProgress);      // 仕入れ申請中
+    const completedItems = items.filter(item => item.statusType === 'completed');  // 完了
 
     const summary = {
       totalItems: items.length,
-      needsOrder: needsOrderItems.length,
-      lowStock: lowStockItems.length,
-      okItems: items.length - needsOrderItems.length - lowStockItems.length
+      needsOrder: needsOrderItems.length,     // 未申請の数
+      inProgress: inProgressItems.length,     // 仕入れ申請中の数
+      completed: completedItems.length        // 完了の数
     };
 
     // ===== カテゴリ別にグループ化 =====
@@ -231,34 +258,49 @@ function doGet(e) {
     });
 
     // カテゴリ内を発注優先でソート
+    // カテゴリ内を仕入れ状況優先でソート（未申請→申請中→完了）
     for (const category of Object.keys(categories)) {
       categories[category].sort((a, b) => {
-        // 発注が必要なものを先に
+        // 未申請を先に
         if (a.needsOrder && !b.needsOrder) return -1;
         if (!a.needsOrder && b.needsOrder) return 1;
+        // 次に申請中
+        if (a.inProgress && !b.inProgress) return -1;
+        if (!a.inProgress && b.inProgress) return 1;
         // 在庫率が低い順
         return a.stockRatio - b.stockRatio;
       });
     }
 
-    // ===== 発注が必要なアイテムリスト =====
+    // ===== 未申請アイテムリスト（発注が必要なアイテム） =====
     const orderList = needsOrderItems.map(item => ({
       name: item.name,
       category: item.category,
       remaining: item.remaining,
       orderLine: item.orderLine,
       shortage: item.ideal - item.remaining,
-      unit: item.unit
+      unit: item.unit,
+      statusType: item.statusType
+    }));
+
+    // ===== 仕入れ申請中アイテムリスト =====
+    const inProgressList = inProgressItems.map(item => ({
+      name: item.name,
+      category: item.category,
+      remaining: item.remaining,
+      unit: item.unit,
+      statusType: item.statusType
     }));
 
     const response = {
       success: true,
       timestamp: new Date().toISOString(),
-      version: '2.2',
+      version: '2.3',
       summary: summary,
       items: items,
       categories: categories,
-      orderList: orderList,
+      orderList: orderList,           // 未申請アイテム
+      inProgressList: inProgressList, // 仕入れ申請中アイテム
       storage: storage
     };
 

@@ -1634,43 +1634,43 @@ const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/1iuTiIGV0Zz-AMx8
 // フォールバック用の在庫データ v2.0（APIが利用できない場合に表示）
 // 在庫管理シートの構造に準拠
 const fallbackInventoryData = {
-    version: '2.2',
+    version: '2.3',
     items: [
-        // コーヒー
-        { name: 'コーヒー豆（シティーローストブラジル）（100g)', category: 'コーヒー', remaining: 2500, ideal: 2000, initial: 3000, orderLine: 1000, unit: 'g', purchaseStatus: '完了', status: 'OK', needsOrder: false, stockRatio: 125 },
-        { name: 'コーヒー豆（ヨーロピアン）（100ｇ）', category: 'コーヒー', remaining: 3000, ideal: 2000, initial: 3000, orderLine: 1000, unit: 'g', purchaseStatus: '完了', status: 'OK', needsOrder: false, stockRatio: 150 },
-        // 乳製品・冷蔵
-        { name: '牛乳(1000ml)', category: '乳製品・冷蔵', remaining: 100, ideal: 15, initial: 15, orderLine: 10, unit: '本', purchaseStatus: '完了', status: 'OK', needsOrder: false, stockRatio: 667 },
-        { name: '氷（3kg）', category: '乳製品・冷蔵', remaining: 1, ideal: 1, initial: 1, orderLine: 0.5, unit: '袋', purchaseStatus: '完了', status: 'OK', needsOrder: false, stockRatio: 100 },
-        { name: 'ホイップクリーム(1L)', category: '乳製品・冷蔵', remaining: 1, ideal: 1, initial: 1, orderLine: 0.5, unit: '本', purchaseStatus: '完了', status: 'OK', needsOrder: false, stockRatio: 100 },
-        // シロップ・ソース
-        { name: 'チョコソース（240g）', category: 'シロップ・ソース', remaining: 1, ideal: 2, initial: 1, orderLine: 2, unit: '本', purchaseStatus: '完了', status: '発注', needsOrder: true, stockRatio: 50 },
-        { name: 'キャラメルソース(240g)', category: 'シロップ・ソース', remaining: 1, ideal: 2, initial: 2, orderLine: 1, unit: '本', purchaseStatus: '完了', status: '発注', needsOrder: true, stockRatio: 50 },
-        { name: 'バニラシロップ（250ml）', category: 'シロップ・ソース', remaining: 1, ideal: 2, initial: 2, orderLine: 1, unit: '本', purchaseStatus: '完了', status: '発注', needsOrder: true, stockRatio: 50 },
-        { name: 'チャイシロップ（250ml）', category: 'シロップ・ソース', remaining: 1, ideal: 2, initial: 2, orderLine: 1, unit: '本', purchaseStatus: '完了', status: '発注', needsOrder: true, stockRatio: 50 },
-        { name: 'ホワイトチョコソース(500ml)', category: 'シロップ・ソース', remaining: 1, ideal: 2, initial: 2, orderLine: 1, unit: '本', purchaseStatus: '完了', status: '発注', needsOrder: true, stockRatio: 50 },
-        // パウダー・茶葉
-        { name: '抹茶パウダー（170g）', category: 'パウダー・茶葉', remaining: 1, ideal: 2, initial: 2, orderLine: 1, unit: '袋', purchaseStatus: '完了', status: '発注', needsOrder: true, stockRatio: 50 },
-        { name: 'ほうじ茶パウダー（170g)', category: 'パウダー・茶葉', remaining: 1, ideal: 2, initial: 2, orderLine: 1, unit: '袋', purchaseStatus: '完了', status: '発注', needsOrder: true, stockRatio: 50 },
-        { name: 'アールグレイパック（20個）', category: 'パウダー・茶葉', remaining: 1, ideal: 2, initial: 2, orderLine: 1, unit: '袋', purchaseStatus: '完了', status: '発注', needsOrder: true, stockRatio: 50 },
-        // 消耗品（容器）
-        { name: '紙カップ（1200個入り）', category: '消耗品（容器）', remaining: 1, ideal: 1, initial: 1, orderLine: 0.5, unit: '箱', purchaseStatus: '完了', status: 'OK', needsOrder: false, stockRatio: 100 },
-        { name: 'フタ（1200個入り）', category: '消耗品（容器）', remaining: 1, ideal: 1, initial: 1, orderLine: 0.5, unit: '箱', purchaseStatus: '完了', status: 'OK', needsOrder: false, stockRatio: 100 },
-        { name: 'プラカップ（1000個入り）', category: '消耗品（容器）', remaining: 1, ideal: 1, initial: 1, orderLine: 0.5, unit: '箱', purchaseStatus: '完了', status: 'OK', needsOrder: false, stockRatio: 100 },
-        { name: 'プラフタ（1000個入り）', category: '消耗品（容器）', remaining: 1, ideal: 1, initial: 1, orderLine: 0.5, unit: '箱', purchaseStatus: '完了', status: 'OK', needsOrder: false, stockRatio: 100 },
-        { name: 'マドラー（1000個入り）', category: '消耗品（容器）', remaining: 1, ideal: 1, initial: 1, orderLine: 0.5, unit: '箱', purchaseStatus: '完了', status: 'OK', needsOrder: false, stockRatio: 100 },
-        { name: 'ストロー(500本×2)', category: '消耗品（容器）', remaining: 2, ideal: 2, initial: 2, orderLine: 1, unit: '袋', purchaseStatus: '完了', status: 'OK', needsOrder: false, stockRatio: 100 },
-        // 消耗品（調味料）
-        { name: 'シュガー(３g×１２０本入り)', category: '消耗品（調味料）', remaining: 2, ideal: 2, initial: 2, orderLine: 1, unit: '袋', purchaseStatus: '完了', status: 'OK', needsOrder: false, stockRatio: 100 },
-        { name: 'ガムシロップ（13g×50個入り）', category: '消耗品（調味料）', remaining: 2, ideal: 2, initial: 2, orderLine: 1, unit: '袋', purchaseStatus: '完了', status: 'OK', needsOrder: false, stockRatio: 100 },
-        { name: 'ミルク（55個入り）', category: '消耗品（調味料）', remaining: 2, ideal: 2, initial: 2, orderLine: 1, unit: '袋', purchaseStatus: '完了', status: 'OK', needsOrder: false, stockRatio: 100 },
-        // 衛生・清掃用品
-        { name: '使いきり手袋', category: '衛生・清掃用品', remaining: 2, ideal: 0, initial: 2, orderLine: 50, unit: '組', purchaseStatus: '完了', status: '発注', needsOrder: true, stockRatio: 100 },
-        { name: '消毒液　手用', category: '衛生・清掃用品', remaining: 2, ideal: 0, initial: 2, orderLine: 2, unit: '本', purchaseStatus: '完了', status: '発注', needsOrder: true, stockRatio: 100 },
-        { name: 'キッチン用アルコール除菌スプレー', category: '衛生・清掃用品', remaining: 2, ideal: 0, initial: 2, orderLine: 2, unit: '本', purchaseStatus: '完了', status: '発注', needsOrder: true, stockRatio: 100 },
-        { name: 'ペーパータオル', category: '衛生・清掃用品', remaining: 2, ideal: 0, initial: 2, orderLine: 2, unit: '個', purchaseStatus: '完了', status: '発注', needsOrder: true, stockRatio: 100 },
-        { name: '食器用スポンジ', category: '衛生・清掃用品', remaining: 2, ideal: 0, initial: 2, orderLine: 2, unit: '個', purchaseStatus: '完了', status: '発注', needsOrder: true, stockRatio: 100 },
-        { name: '食器用洗剤', category: '衛生・清掃用品', remaining: 2, ideal: 0, initial: 2, orderLine: 0, unit: '本', purchaseStatus: '完了', status: 'OK', needsOrder: false, stockRatio: 100 }
+        // コーヒー（全て完了）
+        { name: 'コーヒー豆（シティーローストブラジル）（100g)', category: 'コーヒー', remaining: 2500, ideal: 2000, initial: 3000, orderLine: 1000, unit: 'g', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 125 },
+        { name: 'コーヒー豆（ヨーロピアン）（100ｇ）', category: 'コーヒー', remaining: 3000, ideal: 2000, initial: 3000, orderLine: 1000, unit: 'g', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 150 },
+        // 乳製品・冷蔵（全て完了）
+        { name: '牛乳(1000ml)', category: '乳製品・冷蔵', remaining: 100, ideal: 15, initial: 15, orderLine: 10, unit: '本', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 667 },
+        { name: '氷（3kg）', category: '乳製品・冷蔵', remaining: 1, ideal: 1, initial: 1, orderLine: 0.5, unit: '袋', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 100 },
+        { name: 'ホイップクリーム(1L)', category: '乳製品・冷蔵', remaining: 1, ideal: 1, initial: 1, orderLine: 0.5, unit: '本', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 100 },
+        // シロップ・ソース（デモ用：未申請2件、申請中2件、完了1件）
+        { name: 'チョコソース（240g）', category: 'シロップ・ソース', remaining: 1, ideal: 2, initial: 1, orderLine: 2, unit: '本', purchaseStatus: '未申請', status: '未申請', statusType: 'pending', needsOrder: true, inProgress: false, stockRatio: 50 },
+        { name: 'キャラメルソース(240g)', category: 'シロップ・ソース', remaining: 1, ideal: 2, initial: 2, orderLine: 1, unit: '本', purchaseStatus: '未申請', status: '未申請', statusType: 'pending', needsOrder: true, inProgress: false, stockRatio: 50 },
+        { name: 'バニラシロップ（250ml）', category: 'シロップ・ソース', remaining: 1, ideal: 2, initial: 2, orderLine: 1, unit: '本', purchaseStatus: '仕入れ申請中', status: '申請中', statusType: 'in_progress', needsOrder: false, inProgress: true, stockRatio: 50 },
+        { name: 'チャイシロップ（250ml）', category: 'シロップ・ソース', remaining: 1, ideal: 2, initial: 2, orderLine: 1, unit: '本', purchaseStatus: '仕入れ申請中', status: '申請中', statusType: 'in_progress', needsOrder: false, inProgress: true, stockRatio: 50 },
+        { name: 'ホワイトチョコソース(500ml)', category: 'シロップ・ソース', remaining: 1, ideal: 2, initial: 2, orderLine: 1, unit: '本', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 50 },
+        // パウダー・茶葉（デモ用：未申請1件、申請中1件、完了1件）
+        { name: '抹茶パウダー（170g）', category: 'パウダー・茶葉', remaining: 1, ideal: 2, initial: 2, orderLine: 1, unit: '袋', purchaseStatus: '未申請', status: '未申請', statusType: 'pending', needsOrder: true, inProgress: false, stockRatio: 50 },
+        { name: 'ほうじ茶パウダー（170g)', category: 'パウダー・茶葉', remaining: 1, ideal: 2, initial: 2, orderLine: 1, unit: '袋', purchaseStatus: '仕入れ申請中', status: '申請中', statusType: 'in_progress', needsOrder: false, inProgress: true, stockRatio: 50 },
+        { name: 'アールグレイパック（20個）', category: 'パウダー・茶葉', remaining: 1, ideal: 2, initial: 2, orderLine: 1, unit: '袋', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 50 },
+        // 消耗品（容器）（全て完了）
+        { name: '紙カップ（1200個入り）', category: '消耗品（容器）', remaining: 1, ideal: 1, initial: 1, orderLine: 0.5, unit: '箱', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 100 },
+        { name: 'フタ（1200個入り）', category: '消耗品（容器）', remaining: 1, ideal: 1, initial: 1, orderLine: 0.5, unit: '箱', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 100 },
+        { name: 'プラカップ（1000個入り）', category: '消耗品（容器）', remaining: 1, ideal: 1, initial: 1, orderLine: 0.5, unit: '箱', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 100 },
+        { name: 'プラフタ（1000個入り）', category: '消耗品（容器）', remaining: 1, ideal: 1, initial: 1, orderLine: 0.5, unit: '箱', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 100 },
+        { name: 'マドラー（1000個入り）', category: '消耗品（容器）', remaining: 1, ideal: 1, initial: 1, orderLine: 0.5, unit: '箱', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 100 },
+        { name: 'ストロー(500本×2)', category: '消耗品（容器）', remaining: 2, ideal: 2, initial: 2, orderLine: 1, unit: '袋', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 100 },
+        // 消耗品（調味料）（全て完了）
+        { name: 'シュガー(３g×１２０本入り)', category: '消耗品（調味料）', remaining: 2, ideal: 2, initial: 2, orderLine: 1, unit: '袋', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 100 },
+        { name: 'ガムシロップ（13g×50個入り）', category: '消耗品（調味料）', remaining: 2, ideal: 2, initial: 2, orderLine: 1, unit: '袋', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 100 },
+        { name: 'ミルク（55個入り）', category: '消耗品（調味料）', remaining: 2, ideal: 2, initial: 2, orderLine: 1, unit: '袋', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 100 },
+        // 衛生・清掃用品（デモ用：未申請2件、申請中2件、完了2件）
+        { name: '使いきり手袋', category: '衛生・清掃用品', remaining: 2, ideal: 0, initial: 2, orderLine: 50, unit: '組', purchaseStatus: '未申請', status: '未申請', statusType: 'pending', needsOrder: true, inProgress: false, stockRatio: 100 },
+        { name: '消毒液　手用', category: '衛生・清掃用品', remaining: 2, ideal: 0, initial: 2, orderLine: 2, unit: '本', purchaseStatus: '未申請', status: '未申請', statusType: 'pending', needsOrder: true, inProgress: false, stockRatio: 100 },
+        { name: 'キッチン用アルコール除菌スプレー', category: '衛生・清掃用品', remaining: 2, ideal: 0, initial: 2, orderLine: 2, unit: '本', purchaseStatus: '仕入れ申請中', status: '申請中', statusType: 'in_progress', needsOrder: false, inProgress: true, stockRatio: 100 },
+        { name: 'ペーパータオル', category: '衛生・清掃用品', remaining: 2, ideal: 0, initial: 2, orderLine: 2, unit: '個', purchaseStatus: '仕入れ申請中', status: '申請中', statusType: 'in_progress', needsOrder: false, inProgress: true, stockRatio: 100 },
+        { name: '食器用スポンジ', category: '衛生・清掃用品', remaining: 2, ideal: 0, initial: 2, orderLine: 2, unit: '個', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 100 },
+        { name: '食器用洗剤', category: '衛生・清掃用品', remaining: 2, ideal: 0, initial: 2, orderLine: 0, unit: '本', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 100 }
     ],
     storage: [
         { name: 'コーヒー豆', beforeOpen: '常温', afterOpen: '常温', expiryDays: '2週間', notes: '瓶で密封' },
@@ -1688,27 +1688,27 @@ const fallbackInventoryData = {
         { name: 'ホイップクリーム', beforeOpen: '冷凍庫', afterOpen: '冷蔵庫', expiryDays: '5日', notes: '痛みに注意' },
         { name: '氷', beforeOpen: '冷凍庫', afterOpen: '冷凍庫', expiryDays: '特になし', notes: '特になし' }
     ],
+    // v2.3: 未申請アイテムのリスト（赤表示）
     orderList: [
-        // 実際のスプレッドシートデータに基づく発注リスト（13件）
-        { name: 'チョコソース（240g）', category: 'シロップ・ソース', remaining: 1, orderLine: 2, unit: '本' },
-        { name: 'キャラメルソース(240g)', category: 'シロップ・ソース', remaining: 1, orderLine: 1, unit: '本' },
-        { name: 'バニラシロップ（250ml）', category: 'シロップ・ソース', remaining: 1, orderLine: 1, unit: '本' },
-        { name: 'チャイシロップ（250ml）', category: 'シロップ・ソース', remaining: 1, orderLine: 1, unit: '本' },
-        { name: 'ホワイトチョコソース(500ml)', category: 'シロップ・ソース', remaining: 1, orderLine: 1, unit: '本' },
-        { name: '抹茶パウダー（170g）', category: 'パウダー・茶葉', remaining: 1, orderLine: 1, unit: '袋' },
-        { name: 'ほうじ茶パウダー（170g)', category: 'パウダー・茶葉', remaining: 1, orderLine: 1, unit: '袋' },
-        { name: 'アールグレイパック（20個）', category: 'パウダー・茶葉', remaining: 1, orderLine: 1, unit: '袋' },
-        { name: '使いきり手袋', category: '衛生・清掃用品', remaining: 2, orderLine: 50, unit: '組' },
-        { name: '消毒液　手用', category: '衛生・清掃用品', remaining: 2, orderLine: 2, unit: '本' },
-        { name: 'キッチン用アルコール除菌スプレー', category: '衛生・清掃用品', remaining: 2, orderLine: 2, unit: '本' },
-        { name: 'ペーパータオル', category: '衛生・清掃用品', remaining: 2, orderLine: 2, unit: '個' },
-        { name: '食器用スポンジ', category: '衛生・清掃用品', remaining: 2, orderLine: 2, unit: '個' }
+        { name: 'チョコソース（240g）', category: 'シロップ・ソース', remaining: 1, orderLine: 2, unit: '本', statusType: 'pending' },
+        { name: 'キャラメルソース(240g)', category: 'シロップ・ソース', remaining: 1, orderLine: 1, unit: '本', statusType: 'pending' },
+        { name: '抹茶パウダー（170g）', category: 'パウダー・茶葉', remaining: 1, orderLine: 1, unit: '袋', statusType: 'pending' },
+        { name: '使いきり手袋', category: '衛生・清掃用品', remaining: 2, orderLine: 50, unit: '組', statusType: 'pending' },
+        { name: '消毒液　手用', category: '衛生・清掃用品', remaining: 2, orderLine: 2, unit: '本', statusType: 'pending' }
+    ],
+    // v2.3: 仕入れ申請中アイテムのリスト（オレンジ表示）
+    inProgressList: [
+        { name: 'バニラシロップ（250ml）', category: 'シロップ・ソース', remaining: 1, unit: '本', statusType: 'in_progress' },
+        { name: 'チャイシロップ（250ml）', category: 'シロップ・ソース', remaining: 1, unit: '本', statusType: 'in_progress' },
+        { name: 'ほうじ茶パウダー（170g)', category: 'パウダー・茶葉', remaining: 1, unit: '袋', statusType: 'in_progress' },
+        { name: 'キッチン用アルコール除菌スプレー', category: '衛生・清掃用品', remaining: 2, unit: '本', statusType: 'in_progress' },
+        { name: 'ペーパータオル', category: '衛生・清掃用品', remaining: 2, unit: '個', statusType: 'in_progress' }
     ],
     summary: {
         totalItems: 28,
-        needsOrder: 13,
-        lowStock: 0,
-        okItems: 15
+        needsOrder: 5,      // 未申請
+        inProgress: 5,      // 仕入れ申請中
+        completed: 18       // 完了
     },
     timestamp: null
 };

@@ -127,16 +127,16 @@ async function fetchInventoryData() {
 }
 ```
 
-### 発注アラートセクション
+### v2.3 仕入れ状況ベースの表示セクション
 
 ```javascript
-// 発注が必要なアイテムを先に表示
+// v2.3: 未申請アイテムを赤で表示
 if (data.orderList && data.orderList.length > 0) {
   html += `
-    <div class="order-alert-section">
+    <div class="order-alert-section status-pending-section">
       <h3 class="order-alert-title">
-        <i class="fas fa-exclamation-triangle"></i>
-        発注が必要なアイテム（${data.orderList.length}件）
+        <i class="fas fa-exclamation-circle"></i>
+        未申請（${data.orderList.length}件）
       </h3>
       <div class="order-list">
         ${data.orderList.map(item => `
@@ -144,7 +144,28 @@ if (data.orderList && data.orderList.length > 0) {
             <span class="order-item-name">${item.name}</span>
             <span class="order-item-info">
               残数: <strong>${item.remaining}</strong>${item.unit}
-              （発注ライン: ${item.orderLine}${item.unit}）
+            </span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+// v2.3: 仕入れ申請中アイテムをオレンジで表示
+if (data.inProgressList && data.inProgressList.length > 0) {
+  html += `
+    <div class="in-progress-section status-in-progress-section">
+      <h3 class="in-progress-title">
+        <i class="fas fa-clock"></i>
+        仕入れ申請中（${data.inProgressList.length}件）
+      </h3>
+      <div class="in-progress-list">
+        ${data.inProgressList.map(item => `
+          <div class="in-progress-item">
+            <span class="in-progress-item-name">${item.name}</span>
+            <span class="in-progress-item-info">
+              残数: <strong>${item.remaining}</strong>${item.unit}
             </span>
           </div>
         `).join('')}
@@ -154,15 +175,15 @@ if (data.orderList && data.orderList.length > 0) {
 }
 ```
 
-### 在庫率バー表示
+### 在庫率バー表示（v2.3）
 
 ```javascript
-// 在庫率に応じた色分け
-let barClass = 'bar-ok';
-if (needsOrder) {
-  barClass = 'bar-danger';
-} else if (stockRatio < 50) {
-  barClass = 'bar-warning';
+// v2.3: 仕入れ状況に応じた色分け
+let barClass = 'bar-completed';  // 緑（完了）
+if (item.statusType === 'pending' || item.needsOrder) {
+  barClass = 'bar-pending';       // 赤（未申請）
+} else if (item.statusType === 'in_progress' || item.inProgress) {
+  barClass = 'bar-in-progress';   // オレンジ（仕入れ申請中）
 }
 
 html += `
@@ -195,12 +216,16 @@ function updateApiStatus(status, message) {
 - ローディングインジケーター表示
 - エラー時のリトライ機能
 
-### UX
-- **発注アラートセクション**を最上部に表示
+### UX（v2.3）
+- **未申請アラートセクション**を最上部に赤で表示
+- **仕入れ申請中セクション**をオレンジで表示
 - **在庫率バー**で視覚的に残量を表示
-- **3段階ステータス**: OK（緑）、残少（黄）、要発注（赤）
+- **仕入れ状況に応じた3段階ステータス**:
+  - 完了（緑）: 仕入れ完了
+  - 未申請（赤）: 発注申請が必要
+  - 仕入れ申請中（オレンジ）: 申請済み・到着待ち
 - カテゴリ別グループ表示
-- カテゴリごとの要発注数バッジ
+- カテゴリごとの未申請/申請中数バッジ
 - 最終更新日時の表示
 - **API接続ステータスのリアルタイム表示**
   - 緑点滅: API正常接続中
@@ -249,6 +274,7 @@ JSONデータ取得（v2.0形式）
 
 | バージョン | 日付 | 変更内容 |
 |-----------|------|----------|
+| 2.3 | 2025-12-30 | **仕入れ状況ベース判定**に変更（完了=緑、未申請=赤、仕入れ申請中=オレンジ）、statusType/inProgressフィールド追加、inProgressList追加 |
 | 2.2 | 2025-12-30 | 単位推測ロジック修正（商品名のg/mlではなく商品タイプで判定: ソース→本、パウダー→袋など） |
 | 2.1 | 2025-12-30 | カテゴリ分類ルール最適化（乳製品・冷蔵、衛生・清掃用品）、スポンジ・洗剤対応 |
 | 2.0 | 2025-12-30 | 在庫管理シート参照に変更、カテゴリ自動分類、在庫率表示、発注アラートセクション |

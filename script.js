@@ -1638,23 +1638,45 @@ function renderInventoryList(data, container) {
         `;
     }
 
-    // 発注が必要なアイテムを先に表示
+    // v2.3: 未申請（赤）のアイテムを先に表示
     if (data.orderList && data.orderList.length > 0) {
         html += `
-            <div class="order-alert-section">
+            <div class="order-alert-section status-pending-section">
                 <h3 class="order-alert-title">
                     <i class="fas fa-exclamation-triangle"></i>
-                    発注が必要なアイテム（${data.orderList.length}件）
+                    未申請（要発注）（${data.orderList.length}件）
                 </h3>
                 <div class="order-list">
         `;
         data.orderList.forEach(item => {
             html += `
-                <div class="order-item">
+                <div class="order-item status-pending-item">
                     <span class="order-item-name">${item.name}</span>
                     <span class="order-item-info">
                         残数: <strong>${item.remaining}</strong>${item.unit}
-                        （発注ライン: ${item.orderLine}${item.unit}）
+                    </span>
+                </div>
+            `;
+        });
+        html += '</div></div>';
+    }
+
+    // v2.3: 仕入れ申請中（オレンジ）のアイテムを表示
+    if (data.inProgressList && data.inProgressList.length > 0) {
+        html += `
+            <div class="in-progress-section status-in-progress-section">
+                <h3 class="in-progress-title">
+                    <i class="fas fa-clock"></i>
+                    仕入れ申請中（${data.inProgressList.length}件）
+                </h3>
+                <div class="in-progress-list">
+        `;
+        data.inProgressList.forEach(item => {
+            html += `
+                <div class="in-progress-item status-in-progress-item">
+                    <span class="in-progress-item-name">${item.name}</span>
+                    <span class="in-progress-item-info">
+                        残数: <strong>${item.remaining}</strong>${item.unit}
                     </span>
                 </div>
             `;
@@ -1664,36 +1686,48 @@ function renderInventoryList(data, container) {
 
     // カテゴリ別に表示
     Object.entries(categories).forEach(([category, categoryItems]) => {
-        const needsOrderCount = categoryItems.filter(i => i.needsOrder || i.status === '発注').length;
+        // v2.3: 仕入れ状況ベースでカウント
+        const pendingCount = categoryItems.filter(i => i.needsOrder || i.statusType === 'pending' || i.purchaseStatus === '未申請').length;
+        const inProgressCount = categoryItems.filter(i => i.inProgress || i.statusType === 'in_progress' || i.purchaseStatus === '仕入れ申請中').length;
 
         html += `
             <div class="inventory-category">
                 <h3 class="category-title">
                     <i class="fas fa-folder"></i> ${category}
                     <span class="category-count">${categoryItems.length}件</span>
-                    ${needsOrderCount > 0 ? `<span class="category-alert">${needsOrderCount}件要発注</span>` : ''}
+                    ${pendingCount > 0 ? `<span class="category-alert category-pending">${pendingCount}件未申請</span>` : ''}
+                    ${inProgressCount > 0 ? `<span class="category-alert category-in-progress">${inProgressCount}件申請中</span>` : ''}
                 </h3>
                 <div class="inventory-items">
         `;
 
         categoryItems.forEach(item => {
-            // v2.0: remaining/stockRatio/orderLine を使用、v1.0互換: stock/orderPoint も対応
             const stock = item.remaining !== undefined ? item.remaining : item.stock;
             const orderPoint = item.orderLine !== undefined ? item.orderLine : item.orderPoint;
             const ideal = item.ideal || orderPoint * 2;
             const stockRatio = item.stockRatio !== undefined ? item.stockRatio : (ideal > 0 ? Math.round((stock / ideal) * 100) : 100);
 
-            const needsOrder = item.needsOrder || item.status === '発注';
-            const statusClass = needsOrder ? 'status-order' : (stockRatio < 50 ? 'status-low' : 'status-ok');
-            const statusIcon = needsOrder ? 'fa-exclamation-triangle' : (stockRatio < 50 ? 'fa-exclamation-circle' : 'fa-check-circle');
-            const statusText = needsOrder ? '要発注' : (stockRatio < 50 ? '残少' : 'OK');
+            // v2.3: 仕入れ状況ベースの表示
+            const statusType = item.statusType || (item.purchaseStatus === '未申請' ? 'pending' : (item.purchaseStatus === '仕入れ申請中' ? 'in_progress' : 'completed'));
+            const isPending = statusType === 'pending';
+            const isInProgress = statusType === 'in_progress';
 
-            // 在庫バーの色
-            let barClass = 'bar-ok';
-            if (needsOrder) {
-                barClass = 'bar-danger';
-            } else if (stockRatio < 50) {
-                barClass = 'bar-warning';
+            let statusClass, statusIcon, statusText, barClass;
+            if (isPending) {
+                statusClass = 'status-pending';
+                statusIcon = 'fa-exclamation-triangle';
+                statusText = '未申請';
+                barClass = 'bar-pending';
+            } else if (isInProgress) {
+                statusClass = 'status-in-progress';
+                statusIcon = 'fa-clock';
+                statusText = '申請中';
+                barClass = 'bar-in-progress';
+            } else {
+                statusClass = 'status-completed';
+                statusIcon = 'fa-check-circle';
+                statusText = '完了';
+                barClass = 'bar-completed';
             }
 
             html += `
@@ -1719,11 +1753,9 @@ function renderInventoryList(data, container) {
                     <div class="stock-bar-container">
                         <div class="stock-bar ${barClass}" style="width: ${Math.min(100, stockRatio)}%"></div>
                     </div>
-                    ${item.purchaseStatus ? `
-                    <div class="item-purchase-status">
-                        <i class="fas fa-clipboard-check"></i> ${item.purchaseStatus}
+                    <div class="item-purchase-status ${statusClass}">
+                        <i class="fas ${statusIcon}"></i> ${item.purchaseStatus || statusText}
                     </div>
-                    ` : ''}
                 </div>
             `;
         });

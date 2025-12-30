@@ -32,12 +32,19 @@
 | F | 5 | orderLine | 仕入れライン（発注点） | 1000 |
 | G〜 | 6〜 | - | 仕入れ日と数（履歴） | - |
 
-## 発注判定ロジック
+## 発注判定ロジック v2.3
 
 ```javascript
-// 残数が仕入れライン以下なら発注が必要
-const needsOrder = orderLine > 0 && remaining <= orderLine;
-const status = needsOrder ? '発注' : 'OK';
+// v2.3: 仕入れ状況ベースの判定（残数/仕入れラインではなく「仕入れ状況」列で判定）
+const purchaseStatus = String(row[1] || '').trim();
+const needsOrder = purchaseStatus === '未申請';        // 赤表示
+const inProgress = purchaseStatus === '仕入れ申請中';  // オレンジ表示
+const isCompleted = purchaseStatus === '完了';          // 緑表示
+
+// statusType: 'pending'(未申請), 'in_progress'(申請中), 'completed'(完了)
+let statusType = 'completed';
+if (needsOrder) statusType = 'pending';
+else if (inProgress) statusType = 'in_progress';
 
 // 在庫率 = 残数 / 理想残数 × 100
 const stockRatio = ideal > 0 ? Math.round((remaining / ideal) * 100) : 100;
@@ -90,7 +97,7 @@ const CATEGORY_RULES = {
 
 ## データ構造 v2.0
 
-### 在庫アイテム（新形式）
+### 在庫アイテム（v2.3形式）
 ```javascript
 {
   name: "コーヒー豆（シティーローストブラジル）",
@@ -99,29 +106,32 @@ const CATEGORY_RULES = {
   ideal: 2000,                    // 理想残数
   initial: 3000,                  // 初期仕入れ数
   orderLine: 1000,                // 仕入れライン（発注点）
-  purchaseStatus: "完了",         // 仕入れ状況
-  status: "OK",                   // 発注判定結果
-  needsOrder: false,              // 発注フラグ
+  purchaseStatus: "完了",         // 仕入れ状況（完了/未申請/仕入れ申請中）
+  status: "完了",                 // 表示用ステータス
+  statusType: "completed",        // v2.3: 'completed', 'pending', 'in_progress'
+  needsOrder: false,              // 未申請フラグ
+  inProgress: false,              // v2.3: 仕入れ申請中フラグ
   stockRatio: 125,                // 在庫率（%）
   unit: "g"                       // 単位（自動推測）
 }
 ```
 
-### APIレスポンス構造
+### APIレスポンス構造（v2.3）
 ```javascript
 {
   success: true,
   timestamp: "2025-12-30T01:30:00.000Z",
-  version: "2.0",
+  version: "2.3",
   summary: {
-    totalItems: 24,
-    needsOrder: 2,
-    lowStock: 5,
-    okItems: 17
+    totalItems: 28,
+    needsOrder: 5,       // 未申請の数
+    inProgress: 5,       // 仕入れ申請中の数
+    completed: 18        // 完了の数
   },
   items: [...],           // 全在庫アイテム
-  categories: {...},      // カテゴリ別グループ（発注優先ソート済み）
-  orderList: [...],       // 発注が必要なアイテムリスト
+  categories: {...},      // カテゴリ別グループ（仕入れ状況優先ソート済み）
+  orderList: [...],       // 未申請アイテムリスト（赤表示）
+  inProgressList: [...],  // v2.3: 仕入れ申請中アイテムリスト（オレンジ表示）
   storage: [...]          // 保管場所情報
 }
 ```
@@ -148,23 +158,28 @@ const CATEGORY_RULES = {
    - スプレッドシートへのリンクボタン
    - 更新ボタン
 
-2. **発注アラートセクション**（新機能）
-   - 発注が必要なアイテムを赤枠で強調表示
+2. **未申請アラートセクション**（v2.3）
+   - 仕入れ状況が「未申請」のアイテムを赤枠で強調表示
    - 残数と発注ラインを明示
 
-3. **サマリーカード**
+3. **仕入れ申請中セクション**（v2.3）
+   - 仕入れ状況が「仕入れ申請中」のアイテムをオレンジ枠で表示
+   - 到着待ちアイテムを明示
+
+4. **サマリーカード**
    - 総アイテム数
-   - 発注が必要なアイテム数
-   - 残少アイテム数
+   - 未申請アイテム数（赤）
+   - 申請中アイテム数（オレンジ）
+   - 完了アイテム数（緑）
    - 最終更新日時
 
-4. **在庫一覧**
+5. **在庫一覧**
    - カテゴリ別グループ
-   - 各カテゴリに要発注数バッジ
-   - 在庫率バー（緑/黄/赤）
+   - 各カテゴリに未申請/申請中数バッジ
+   - 在庫率バー（緑=完了/オレンジ=申請中/赤=未申請）
    - 仕入れ状況表示
 
-5. **保管場所一覧**
+6. **保管場所一覧**
    - 品名ごとの保管方法
    - 消費期限の目安
 
@@ -185,6 +200,7 @@ const CATEGORY_RULES = {
 
 | バージョン | 日付 | 変更内容 |
 |-----------|------|----------|
+| 2.3 | 2025-12-30 | **仕入れ状況ベース判定**に変更（完了=緑、未申請=赤、仕入れ申請中=オレンジ）、statusType/inProgressフィールド追加、inProgressList追加 |
 | 2.2 | 2025-12-30 | 単位推測ロジック修正（商品名のg/mlではなく商品タイプで判定: ソース→本、パウダー→袋など） |
 | 2.1 | 2025-12-30 | カテゴリ分類ルール最適化（乳製品・冷蔵、衛生・清掃用品）、スポンジ・洗剤対応 |
 | 2.0 | 2025-12-30 | 在庫管理シートを主データソースに変更、カテゴリ自動分類、在庫率表示、発注アラートセクション追加 |
