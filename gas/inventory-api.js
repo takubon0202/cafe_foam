@@ -1,6 +1,10 @@
 /**
- * Cafe Foam 在庫管理 API v2.1
+ * Cafe Foam 在庫管理 API v2.2
  * Google Apps Script (GAS)
+ *
+ * v2.2 変更点:
+ * - 単位推測ロジック（inferUnit）を完全に書き直し
+ * - 商品名のg/mlではなく、商品タイプ（ソース→本、パウダー→袋など）で単位を判定
  *
  * v2.1 変更点:
  * - カテゴリ分類ルールを実際のスプレッドシートデータに基づいて最適化
@@ -62,7 +66,8 @@ function categorizeItem(itemName) {
 }
 
 /**
- * 単位を商品名から推測
+ * 単位を商品名から推測 v2.1
+ * 商品の数え方（本、袋、箱など）を適切に判定
  * @param {string} itemName - 商品名
  * @param {number} value - 数値
  * @returns {string} 単位
@@ -70,17 +75,45 @@ function categorizeItem(itemName) {
 function inferUnit(itemName, value) {
   const name = String(itemName).toLowerCase();
 
-  if (name.includes('g)') || name.includes('g）')) return 'g';
-  if (name.includes('ml)') || name.includes('ml）')) return 'ml';
-  if (name.includes('l)') || name.includes('l）')) return 'L';
-  if (name.includes('個入り')) return '箱';
-  if (name.includes('本入り')) return '袋';
+  // === 優先順位1: 商品タイプで判定（容器単位で数える商品）===
+
+  // ソース・シロップ類 → 本
+  if (name.includes('ソース') || name.includes('シロップ')) return '本';
+
+  // パウダー類 → 袋
+  if (name.includes('パウダー')) return '袋';
+
+  // 牛乳・クリーム類 → 本
+  if (name.includes('牛乳') || name.includes('ミルク') && !name.includes('個入り')) return '本';
+  if (name.includes('ホイップ') || name.includes('クリーム')) return '本';
+
+  // 茶葉・パック類 → 袋
+  if (name.includes('パック') || name.includes('ティー') || name.includes('アールグレイ')) return '袋';
+
+  // 消毒液・洗剤・スプレー類 → 本
+  if (name.includes('消毒') || name.includes('洗剤') || name.includes('スプレー')) return '本';
+
+  // 氷 → 袋
+  if (name.includes('氷')) return '袋';
+
+  // === 優先順位2: 包装形態で判定 ===
+
+  // 個入り・本入り → 箱
+  if (name.includes('個入り') || name.includes('本入り')) return '箱';
+
+  // 袋入り → 袋
   if (name.includes('袋')) return '袋';
+
+  // 組 → 組
   if (name.includes('組')) return '組';
 
-  // 数値から推測
-  if (value >= 1000) return 'g';
+  // 手袋 → 箱
+  if (name.includes('手袋')) return '箱';
 
+  // === 優先順位3: コーヒー豆は重量で管理 ===
+  if (name.includes('コーヒー豆')) return 'g';
+
+  // === デフォルト ===
   return '個';
 }
 
@@ -221,7 +254,7 @@ function doGet(e) {
     const response = {
       success: true,
       timestamp: new Date().toISOString(),
-      version: '2.1',
+      version: '2.2',
       summary: summary,
       items: items,
       categories: categories,

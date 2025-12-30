@@ -1634,7 +1634,7 @@ const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/1iuTiIGV0Zz-AMx8
 // フォールバック用の在庫データ v2.0（APIが利用できない場合に表示）
 // 在庫管理シートの構造に準拠
 const fallbackInventoryData = {
-    version: '2.1',
+    version: '2.2',
     items: [
         // コーヒー
         { name: 'コーヒー豆（シティーローストブラジル）（100g)', category: 'コーヒー', remaining: 2500, ideal: 2000, initial: 3000, orderLine: 1000, unit: 'g', purchaseStatus: '完了', status: 'OK', needsOrder: false, stockRatio: 125 },
