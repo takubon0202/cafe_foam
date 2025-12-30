@@ -1573,36 +1573,34 @@ function renderInventorySummary(data) {
     const completedEl = document.getElementById('completedCount');
     const lastUpdatedEl = document.getElementById('lastUpdated');
 
-    // 総数
-    const totalItems = data.summary?.totalItems || data.items?.length || 0;
+    // items配列を取得（APIレスポンスまたはフォールバック）
+    const items = data.items || [];
 
-    // 発注が必要な数（未申請）
-    let needsOrderCount = 0;
-    if (data.summary?.needsOrder !== undefined) {
-        needsOrderCount = data.summary.needsOrder;
-    } else if (data.items) {
-        needsOrderCount = data.items.filter(item => item.statusType === 'pending' || item.needsOrder).length;
-    }
+    // 総数（itemsから直接カウント）
+    const totalItems = items.length || data.summary?.totalItems || 0;
 
-    // 完了数（v2.4: 複数の方法で計算）
-    let completedCount = 0;
-    if (data.summary?.completed !== undefined) {
-        // v2.4形式: summary.completed がある場合
-        completedCount = data.summary.completed;
-    } else if (data.summary?.okItems !== undefined) {
-        // 旧形式: summary.okItems がある場合
-        completedCount = data.summary.okItems;
-    } else if (data.items) {
-        // items から計算
-        completedCount = data.items.filter(item =>
-            item.statusType === 'completed' ||
-            (item.purchaseStatus === '完了') ||
-            (!item.needsOrder && !item.inProgress)
-        ).length;
-    } else {
-        // 計算できない場合は総数から発注数を引く
-        completedCount = totalItems - needsOrderCount - (data.summary?.inProgress || 0);
-    }
+    // 発注が必要な数（未申請）- itemsから直接カウント
+    const needsOrderCount = items.filter(item =>
+        item.purchaseStatus === '未申請' ||
+        item.statusType === 'pending' ||
+        item.needsOrder === true
+    ).length;
+
+    // 申請中の数 - itemsから直接カウント
+    const inProgressCount = items.filter(item =>
+        item.purchaseStatus === '仕入れ申請中' ||
+        item.statusType === 'in_progress' ||
+        item.inProgress === true
+    ).length;
+
+    // 完了数 - itemsから直接カウント（最も確実な方法）
+    const completedCount = items.filter(item =>
+        item.purchaseStatus === '完了' ||
+        item.statusType === 'completed'
+    ).length;
+
+    // デバッグログ（問題解決後に削除可能）
+    console.log('[在庫サマリー] 総数:', totalItems, '未申請:', needsOrderCount, '申請中:', inProgressCount, '完了:', completedCount);
 
     if (totalEl) totalEl.textContent = totalItems || '-';
     if (needsOrderEl) needsOrderEl.textContent = needsOrderCount;
