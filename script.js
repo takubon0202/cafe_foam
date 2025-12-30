@@ -1570,7 +1570,7 @@ async function initInventoryPage() {
 function renderInventorySummary(data) {
     const totalEl = document.getElementById('totalItemsCount');
     const needsOrderEl = document.getElementById('needsOrderCount');
-    const completedEl = document.getElementById('completedCount');
+    const completedEl = document.getElementById('inventoryCompletedCount');
     const lastUpdatedEl = document.getElementById('lastUpdated');
 
     // items配列を取得（APIレスポンスまたはフォールバック）
