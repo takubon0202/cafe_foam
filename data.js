@@ -1676,8 +1676,11 @@ const INVENTORY_UNIT_RULES = [
     { pattern: '袋', unit: '袋' },
     { pattern: '組', unit: '組' },
     { pattern: '手袋', unit: '箱' },
-    // 優先度3: コーヒー豆
-    { pattern: 'コーヒー豆', unit: 'g' }
+    // 優先度3: コーヒー豆（複数パターン対応）
+    { pattern: 'コーヒー豆', unit: 'g' },
+    { pattern: 'ロースト', unit: 'g' },          // シティロースト、ヨーロピアンなど
+    { pattern: 'ブラジル', unit: 'g' },          // 産地名でも対応
+    { pattern: 'エスプレッソ豆', unit: 'g' }
 ];
 
 /**
@@ -1786,7 +1789,7 @@ function generateInventoryDerivedData(items) {
 // orderList, inProgressList, summary, categories は自動生成される
 
 const fallbackInventoryData = {
-    version: '2.4',
+    version: '2.5',
     items: [
         // コーヒー（全て完了）
         { name: 'コーヒー豆（シティーローストブラジル）（100g)', category: 'コーヒー', remaining: 2500, ideal: 2000, initial: 3000, orderLine: 1000, unit: 'g', purchaseStatus: '完了', status: '完了', statusType: 'completed', needsOrder: false, inProgress: false, stockRatio: 125 },

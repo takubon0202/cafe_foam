@@ -21,6 +21,10 @@
  * バージョン履歴
  * =========================================
  *
+ * v2.5 変更点:
+ * - UNIT_RULESにコーヒー豆用の追加パターン（ロースト、ブラジル、エスプレッソ豆）
+ * - シティローストブラジル等の単位表示を確実に「g」にする
+ *
  * v2.4 変更点:
  * - 拡張性を高めるためのリファクタリング
  * - UNIT_RULES をテーブル化（配列ベース）
@@ -114,8 +118,11 @@ const UNIT_RULES = [
   { pattern: '袋', unit: '袋' },
   { pattern: '組', unit: '組' },
   { pattern: '手袋', unit: '箱' },
-  // 優先度3: コーヒー豆
-  { pattern: 'コーヒー豆', unit: 'g' }
+  // 優先度3: コーヒー豆（複数パターン対応）
+  { pattern: 'コーヒー豆', unit: 'g' },
+  { pattern: 'ロースト', unit: 'g' },          // シティロースト、ヨーロピアンなど
+  { pattern: 'ブラジル', unit: 'g' },          // 産地名でも対応
+  { pattern: 'エスプレッソ豆', unit: 'g' }
   // 新しいルールはここに追加
 ];
 
@@ -333,7 +340,7 @@ function doGet(e) {
     const response = {
       success: true,
       timestamp: new Date().toISOString(),
-      version: '2.4',
+      version: '2.5',
       summary: summary,
       items: items,
       categories: categories,

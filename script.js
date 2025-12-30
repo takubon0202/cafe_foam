@@ -1604,9 +1604,9 @@ function renderInventorySummary(data) {
     console.log('[在庫サマリー] 総数:', totalItems, '未申請:', needsOrderCount, '申請中:', inProgressCount, '完了:', completedCount);
 
     if (totalEl) totalEl.textContent = totalItems || '-';
-    if (needsOrderEl) needsOrderEl.textContent = needsOrderCount;
-    if (inProgressEl) inProgressEl.textContent = inProgressCount;
-    if (completedEl) completedEl.textContent = completedCount;
+    if (needsOrderEl) needsOrderEl.textContent = needsOrderCount || '-';
+    if (inProgressEl) inProgressEl.textContent = inProgressCount || '-';
+    if (completedEl) completedEl.textContent = completedCount || '-';
 
     if (lastUpdatedEl) {
         if (data.timestamp) {
