@@ -98,31 +98,32 @@ const CATEGORY_RULES = {
 // 注意: 配列の上から順に評価され、最初にマッチしたルールが適用される
 // より限定的なパターンを上に配置すること
 const UNIT_RULES = [
-  // 優先度1: 商品タイプ（容器単位で数える商品）
+  // ========== 優先度1: コーヒー豆（最優先 - 「シティー」に「ティー」が含まれるため） ==========
+  { pattern: 'コーヒー豆', unit: 'g' },
+  { pattern: 'エスプレッソ豆', unit: 'g' },
+  { pattern: 'ロースト', unit: 'g' },          // シティロースト、ヨーロピアンなど
+  { pattern: 'ブラジル', unit: 'g' },          // 産地名でも対応
+  // ========== 優先度2: 液体・ソース類 ==========
   { pattern: 'ソース', unit: '本' },
   { pattern: 'シロップ', unit: '本' },
-  { pattern: 'パウダー', unit: '袋' },
   { pattern: '牛乳', unit: '本' },
   { pattern: 'ホイップ', unit: '本' },
   { pattern: 'クリーム', unit: '本' },
   { pattern: '消毒', unit: '本' },
   { pattern: '洗剤', unit: '本' },
   { pattern: 'スプレー', unit: '本' },
+  // ========== 優先度3: 粉末・茶葉 ==========
+  { pattern: 'パウダー', unit: '袋' },
   { pattern: '氷', unit: '袋' },
   { pattern: 'パック', unit: '袋' },
-  { pattern: 'ティー', unit: '袋' },
+  { pattern: '紅茶', unit: '袋' },             // 「ティー」→「紅茶」に変更（シティーとの誤マッチ防止）
   { pattern: 'アールグレイ', unit: '袋' },
-  // 優先度2: 包装形態
+  // ========== 優先度4: 包装形態 ==========
   { pattern: '個入り', unit: '箱' },
   { pattern: '本入り', unit: '箱' },
   { pattern: '袋', unit: '袋' },
   { pattern: '組', unit: '組' },
-  { pattern: '手袋', unit: '箱' },
-  // 優先度3: コーヒー豆（複数パターン対応）
-  { pattern: 'コーヒー豆', unit: 'g' },
-  { pattern: 'ロースト', unit: 'g' },          // シティロースト、ヨーロピアンなど
-  { pattern: 'ブラジル', unit: 'g' },          // 産地名でも対応
-  { pattern: 'エスプレッソ豆', unit: 'g' }
+  { pattern: '手袋', unit: '箱' }
   // 新しいルールはここに追加
 ];
 
